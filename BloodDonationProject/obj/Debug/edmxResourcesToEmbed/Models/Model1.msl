@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities1">
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.Post">
+        <MappingFragment StoreEntitySet="Posts">
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="WantedBlood" ColumnName="WantedBlood" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reports">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.report">
+        <MappingFragment StoreEntitySet="reports">
+          <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+          <ScalarProperty Name="Report1" ColumnName="Report" />
+          <ScalarProperty Name="DonorId" ColumnName="DonorId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userInfoes">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.userInfo">
+        <MappingFragment StoreEntitySet="userInfo">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Docoment" ColumnName="Docoment" />
+          <ScalarProperty Name="ProPic" ColumnName="ProPic" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

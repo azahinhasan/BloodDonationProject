@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodDonationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Posts">
+    <Key>
+      <PropertyRef Name="PostID" />
+    </Key>
+    <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="WantedBlood" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Text" Type="varchar" MaxLength="500" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reports">
+    <Key>
+      <PropertyRef Name="ReportId" />
+    </Key>
+    <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DonorId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userInfo">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Docoment" Type="varchar" MaxLength="50" />
+    <Property Name="ProPic" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Posts_Posts">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="Posts1" Type="Self.Posts" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Posts1">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reports_DonorID">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="reports" Type="Self.reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="reports">
+        <PropertyRef Name="DonorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reports_userID">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="reports" Type="Self.reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="reports">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userInfo_Posts">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="userInfo1">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BloodDonationDBModelStoreContainer">
+    <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Posts1" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Posts_userInfo" Association="Self.FK_Posts_userInfo">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reports_DonorID" Association="Self.FK_reports_DonorID">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="reports" EntitySet="reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="reports" EntitySet="reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="userInfo1" EntitySet="userInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
