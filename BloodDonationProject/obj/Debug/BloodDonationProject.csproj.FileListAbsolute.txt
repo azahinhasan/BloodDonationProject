@@ -74,3 +74,4 @@ C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\o
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.csproj.CopyComplete
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.dll
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.pdb
+C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\bin\Rotativa.dll

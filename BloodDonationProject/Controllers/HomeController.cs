@@ -11,7 +11,7 @@ namespace BloodDonationProject.Controllers
 {
     public class HomeController : Controller
     {
-        Models.BloodDonationDBEntities3 context = new Models.BloodDonationDBEntities3();
+        Models.BloodDonationDBEntities6 context = new Models.BloodDonationDBEntities6();
         // GET: Home
         public ActionResult Index()
         {

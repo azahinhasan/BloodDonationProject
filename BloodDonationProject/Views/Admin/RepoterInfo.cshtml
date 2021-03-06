@@ -1,0 +1,104 @@
+﻿@model IEnumerable<BloodDonationProject.Models.userInfo>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RepoterInfo</title>
+</head>
+<body>
+
+    <table class="table" border="1">
+        <tr>
+
+            <th>
+                Name
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                DOB
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Doc
+            </th>
+            <th>
+                Pic
+            </th>
+            <th>
+                BloodGroup
+            </th>
+            <th>
+                ReportCounter
+            </th>
+
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+             @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Docoment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProPic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BloodGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportCounter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userID)
+        </td>
+
+        <td>
+            @Html.ActionLink("RepoterHistory", "RepoterHistory", new { id = item.userID } , Model)
+        </td>
+    </tr>
+    }
+    
+    </table>
+
+</body>
+</html>

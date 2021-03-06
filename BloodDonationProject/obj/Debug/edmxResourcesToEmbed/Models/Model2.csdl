@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodDonationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="bannedUser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BannedDate" Type="DateTime" Precision="3" />
+    <Property Name="duration" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="PostID" />
+    </Key>
+    <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WantedBlood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Posts1" Relationship="Self.FK_Posts_Posts" FromRole="Posts" ToRole="Posts1" />
+    <NavigationProperty Name="Post1" Relationship="Self.FK_Posts_Posts" FromRole="Posts1" ToRole="Posts" />
+    <NavigationProperty Name="userInfo" Relationship="Self.FK_Posts_userInfo" FromRole="Posts" ToRole="userInfo" />
+  </EntityType>
+  <EntityType Name="report">
+    <Key>
+      <PropertyRef Name="ReportId" />
+    </Key>
+    <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Report1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DonorId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="userInfo" Relationship="Self.FK_reports_DonorID" FromRole="reports" ToRole="userInfo" />
+    <NavigationProperty Name="userInfo1" Relationship="Self.FK_reports_userID" FromRole="reports" ToRole="userInfo" />
+  </EntityType>
+  <EntityType Name="userInfo">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Docoment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProPic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReportCounter" Type="Int32" />
+    <Property Name="BanStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="isVerified" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_userInfo" FromRole="userInfo" ToRole="Posts" />
+    <NavigationProperty Name="reports" Relationship="Self.FK_reports_DonorID" FromRole="userInfo" ToRole="reports" />
+    <NavigationProperty Name="reports1" Relationship="Self.FK_reports_userID" FromRole="userInfo" ToRole="reports" />
+    <NavigationProperty Name="userInfo1" Relationship="Self.FK_userInfo_Posts" FromRole="userInfo" ToRole="userInfo1" />
+    <NavigationProperty Name="userInfo2" Relationship="Self.FK_userInfo_Posts" FromRole="userInfo1" ToRole="userInfo" />
+  </EntityType>
+  <Association Name="FK_Posts_Posts">
+    <End Role="Posts" Type="Self.Post" Multiplicity="1" />
+    <End Role="Posts1" Type="Self.Post" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Posts1">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reports_DonorID">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="reports" Type="Self.report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="reports">
+        <PropertyRef Name="DonorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reports_userID">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="reports" Type="Self.report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="reports">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userInfo_Posts">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="userInfo1">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BloodDonationDBEntities6" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="reports" EntityType="Self.report" />
+    <EntitySet Name="userInfoes" EntityType="Self.userInfo" />
+    <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Posts1" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Posts_userInfo" Association="Self.FK_Posts_userInfo">
+      <End Role="userInfo" EntitySet="userInfoes" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reports_DonorID" Association="Self.FK_reports_DonorID">
+      <End Role="userInfo" EntitySet="userInfoes" />
+      <End Role="reports" EntitySet="reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
+      <End Role="userInfo" EntitySet="userInfoes" />
+      <End Role="reports" EntitySet="reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
+      <End Role="userInfo" EntitySet="userInfoes" />
+      <End Role="userInfo1" EntitySet="userInfoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

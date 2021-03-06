@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BloodDonationProject.Models.report>
+
+@section css {
+    <link href="~/Content/main.css" rel="stylesheet" />
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>showReports</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                Report
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.userInfo.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.userInfo1.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Report1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userInfo.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userInfo1.Name)
+                </td>
+                <td>
+                    |
+                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, id2 = item.UserId }) |
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

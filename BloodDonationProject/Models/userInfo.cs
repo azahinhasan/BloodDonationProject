@@ -33,6 +33,9 @@ namespace BloodDonationProject.Models
         public string Docoment { get; set; }
         public string ProPic { get; set; }
         public string BloodGroup { get; set; }
+        public Nullable<int> ReportCounter { get; set; }
+        public string BanStatus { get; set; }
+        public string isVerified { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
