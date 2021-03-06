@@ -11,7 +11,7 @@ namespace BloodDonationProject.Controllers
 {
     public class HomeController : Controller
     {
-        Models.BloodDonationDBEntities1 context = new Models.BloodDonationDBEntities1();
+        Models.BloodDonationDBEntities3 context = new Models.BloodDonationDBEntities3();
         // GET: Home
         public ActionResult Index()
         {
@@ -45,6 +45,7 @@ namespace BloodDonationProject.Controllers
                 TempData["errorLogin"] = "solved";
                 return RedirectToAction("Index" , "Admin" , new { email = Info.Email });
             }
+
             if (DonorisValid)
             {
                 FormsAuthentication.SetAuthCookie(Info.Email, false);

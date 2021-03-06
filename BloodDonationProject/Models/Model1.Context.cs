@@ -13,10 +13,10 @@ namespace BloodDonationProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BloodDonationDBEntities1 : DbContext
+    public partial class BloodDonationDBEntities3 : DbContext
     {
-        public BloodDonationDBEntities1()
-            : base("name=BloodDonationDBEntities1")
+        public BloodDonationDBEntities3()
+            : base("name=BloodDonationDBEntities3")
         {
         }
     
