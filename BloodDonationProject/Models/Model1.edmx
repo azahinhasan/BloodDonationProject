@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BloodDonationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="WantedBlood" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Text" Type="varchar" MaxLength="500" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Report" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DonorId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userInfo">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Docoment" Type="varchar" MaxLength="50" />
+          <Property Name="ProPic" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Posts_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Posts1" Type="Self.Posts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Posts1">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_userInfo">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reports_DonorID">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="DonorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reports_userID">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="reports" Type="Self.reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userInfo_Posts">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="userInfo1">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BloodDonationDBModelStoreContainer">
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Posts1" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_userInfo" Association="Self.FK_Posts_userInfo">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reports_DonorID" Association="Self.FK_reports_DonorID">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="userInfo1" EntitySet="userInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BloodDonationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WantedBlood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Posts1" Relationship="Self.FK_Posts_Posts" FromRole="Posts" ToRole="Posts1" />
+          <NavigationProperty Name="Post1" Relationship="Self.FK_Posts_Posts" FromRole="Posts1" ToRole="Posts" />
+          <NavigationProperty Name="userInfo" Relationship="Self.FK_Posts_userInfo" FromRole="Posts" ToRole="userInfo" />
+        </EntityType>
+        <EntityType Name="report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Report1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DonorId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="userInfo" Relationship="Self.FK_reports_DonorID" FromRole="reports" ToRole="userInfo" />
+          <NavigationProperty Name="userInfo1" Relationship="Self.FK_reports_userID" FromRole="reports" ToRole="userInfo" />
+        </EntityType>
+        <EntityType Name="userInfo">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Docoment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProPic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_userInfo" FromRole="userInfo" ToRole="Posts" />
+          <NavigationProperty Name="reports" Relationship="Self.FK_reports_DonorID" FromRole="userInfo" ToRole="reports" />
+          <NavigationProperty Name="reports1" Relationship="Self.FK_reports_userID" FromRole="userInfo" ToRole="reports" />
+          <NavigationProperty Name="userInfo1" Relationship="Self.FK_userInfo_Posts" FromRole="userInfo" ToRole="userInfo1" />
+          <NavigationProperty Name="userInfo2" Relationship="Self.FK_userInfo_Posts" FromRole="userInfo1" ToRole="userInfo" />
+        </EntityType>
+        <Association Name="FK_Posts_Posts">
+          <End Role="Posts" Type="Self.Post" Multiplicity="1" />
+          <End Role="Posts1" Type="Self.Post" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Posts1">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_userInfo">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reports_DonorID">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="reports" Type="Self.report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="DonorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reports_userID">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="reports" Type="Self.report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="reports">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userInfo_Posts">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="userInfo1">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BloodDonationDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="reports" EntityType="Self.report" />
+          <EntitySet Name="userInfoes" EntityType="Self.userInfo" />
+          <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Posts1" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_userInfo" Association="Self.FK_Posts_userInfo">
+            <End Role="userInfo" EntitySet="userInfoes" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reports_DonorID" Association="Self.FK_reports_DonorID">
+            <End Role="userInfo" EntitySet="userInfoes" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
+            <End Role="userInfo" EntitySet="userInfoes" />
+            <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
+            <End Role="userInfo" EntitySet="userInfoes" />
+            <End Role="userInfo1" EntitySet="userInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities1">
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="BloodDonationDBModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="WantedBlood" ColumnName="WantedBlood" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reports">
+            <EntityTypeMapping TypeName="BloodDonationDBModel.report">
+              <MappingFragment StoreEntitySet="reports">
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="Report1" ColumnName="Report" />
+                <ScalarProperty Name="DonorId" ColumnName="DonorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userInfoes">
+            <EntityTypeMapping TypeName="BloodDonationDBModel.userInfo">
+              <MappingFragment StoreEntitySet="userInfo">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Docoment" ColumnName="Docoment" />
+                <ScalarProperty Name="ProPic" ColumnName="ProPic" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
