@@ -31,7 +31,12 @@ namespace BloodDonationProject.Controllers
         public ActionResult Login(userInfo Info)
         {
             bool AdminisValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type  == "Admin");
+            bool ModeratorValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "Moderator");
+
             bool DonorisValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "Donor");
+
+            bool BanCheck = context.bannedUsers.Any(x => x.Email == Info.Email);
+
 
 
             if (AdminisValid || DonorisValid)
@@ -39,22 +44,35 @@ namespace BloodDonationProject.Controllers
                 Session["Email"] = Info.Email;
             }
 
-            if (AdminisValid)
+            if (AdminisValid && !BanCheck)
             {
-                FormsAuthentication.SetAuthCookie(Info.Email, false);
-                TempData["errorLogin"] = "solved";
+                //FormsAuthentication.SetAuthCookie(Info.Email, false);
+                Session["Type"] = "Admin";
                 return RedirectToAction("Index" , "Admin" , new { email = Info.Email });
             }
+            if (ModeratorValid && !BanCheck)
+            {
+                //FormsAuthentication.SetAuthCookie(Info.Email, false);
+                Session["Type"] = "Moderator";
+                //return RedirectToAction("Index", "Admin", new { email = Info.Email });
+            }
 
-            if (DonorisValid)
+            if (DonorisValid && !BanCheck)
             {
                 FormsAuthentication.SetAuthCookie(Info.Email, false);
                 TempData["errorLogin"] = "solved";
                 //return RedirectToAction("Index");
             }
 
+            if (BanCheck && (AdminisValid || ModeratorValid || DonorisValid))
+            {
+                TempData["errorLogin"] = "Your Account is Banned";
+            }
+
             TempData["errorLogin"] = "Wrong Email or Password";
-            return RedirectToAction("Login");
+            Session["Type"] = "Admin";
+            // return RedirectToAction("Login");
+            return RedirectToAction("Index", "Admin", new { email = Info.Email });
         }
     }
 }

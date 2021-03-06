@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BloodDonationProject.Models.userInfo>
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
+    <title>AdnModList</title>
+</head>
+<body>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Docoment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProPic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodGroup)
+            </th>
+            <th>
+                Promotion
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+               @* @Html.DisplayFor(modelItem => item.DOB.ToString("dd/MM/yyyy"))*@
+                @item.DOB.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Docoment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProPic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodGroup)
+            </td>
+            <td>
+               <a href="@Url.Action("typeChage","Admin",new {id= item.userID})" style="pointer-events: @(@Session["Type"] == "Admin" ? "": "none")">
+                @(item.Type == "Admin" ? "Demotion" : "Promotion")</a>
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

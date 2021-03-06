@@ -1,23 +1,24 @@
 ﻿
-@{
-    Layout = null;
-}
+
+
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
     <title>Index</title>
 </head>
 <body>
 
-        <nav>
-            <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor Info", "Create")</span>
-            <span style="margin: 10px 10px"> @Html.ActionLink("All Reporst", "showReports")</span>
-            <a style="margin: 10px 10px" href="/">See FeedBacks</a>
-            <a style="margin: 10px 10px" href="/">Other Users Info</a>
-        </nav>
+    <nav>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor Info", "Create")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reporst", "showReports")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor List", "AdnModList")</span>
+        <a style="margin: 10px 10px" href="/">See FeedBacks</a>
+        <a style="margin: 10px 10px" href="/">Other Users Info</a>
+    </nav>
 
 
     <div>

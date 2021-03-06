@@ -41,6 +41,38 @@ namespace BloodDonationProject.Controllers
             return View(context.reports.Where(r => r.DonorId == id));
         }
 
+     
+        public ActionResult AdnModList()
+        {
+
+
+            //var data = context.userInfoes.Where(r => r.Type == "Admin").FirstOrDefault<userInfo>();
+            //Moderator
+
+            return View(context.userInfoes.Where(r => r.Type == "Admin" | r.Type == "Moderator"));
+        }
+
+        public ActionResult typeChage(int id)
+        {
+
+
+            var data = context.userInfoes.Where(r => r.userID == id).FirstOrDefault<userInfo>();
+            //Moderator
+
+            if (data.Type == "Moderator")
+            {
+                data.Type = "Admin";
+            }
+            else
+            {
+                data.Type = "Moderator";
+            }
+            
+            context.Entry(data).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+            return RedirectToAction("AdnModList");
+        }
+
         [HttpGet]
         public ActionResult BanUser(int id)
         {
