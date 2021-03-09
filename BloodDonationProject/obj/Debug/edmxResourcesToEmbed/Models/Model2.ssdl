@@ -48,6 +48,7 @@
     <Property Name="ReportCounter" Type="int" />
     <Property Name="BanStatus" Type="varchar" MaxLength="50" />
     <Property Name="isVerified" Type="varchar" MaxLength="50" />
+    <Property Name="darkMood" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Posts_Posts">
     <End Role="Posts" Type="Self.Posts" Multiplicity="1" />

@@ -9,19 +9,26 @@
     <meta name="viewport" content="width=device-width" />
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
     <title>Index</title>
+ 
 </head>
-<body>
-
-    <nav>
-        <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor Info", "Create")</span>
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)"); 
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
+    
+    <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:20px;font-weight:bold">
+        <span style="margin: 10px 10px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("All Reporst", "showReports")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor List", "AdnModList")</span>
         <a style="margin: 10px 10px" href="/">See FeedBacks</a>
         <a style="margin: 10px 10px" href="/">Other Users Info</a>
+        <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
+        @*<a style="margin: 10px 10px" href="@Url.Action("darkMood","Admin")">Dark Mood</a>*@
+        @Html.ActionLink("Dark Mood", "darkMood")
     </nav>
 
 
     <div>
+        <p>SS : @Session["Email"] -- </p>
+
         It is Admin Profile.
     </div>
 </body>

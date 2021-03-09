@@ -6,24 +6,35 @@ using System.Web.Mvc;
 using BloodDonationProject.Models;
 using System.Web.Security;
 using Rotativa;
-
+using System.IO;
 
 
 namespace BloodDonationProject.Controllers
 {
     public class AdminController : Controller
     {
-        Models.BloodDonationDBEntities6 context = new Models.BloodDonationDBEntities6();
+        Models.BloodDonationDBEntities7 context = new Models.BloodDonationDBEntities7();
         // GET: Admin
         public ActionResult Index()
         {
+            if(Session["Email"] == null || Session["Type"].ToString() != "Admin")
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            var email = Session["Email"].ToString();
+            var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+
+            Session["DarkMood"] = data.darkMood;
             return View();
         }
 
     
         public ActionResult AfterReg(string email)
         {
-            return View(context.userInfoes.Where(r => r.Email == email));
+            var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+
+            return View(context.userInfoes.Find(data.userID));
         }
 
         public ActionResult showReports()
@@ -73,6 +84,31 @@ namespace BloodDonationProject.Controllers
             return RedirectToAction("AdnModList");
         }
 
+        public ActionResult darkMood()
+        {
+            var email = Session["Email"].ToString();
+            var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+
+            if(data.darkMood == "yes")
+            {
+                data.darkMood = "no";  
+            }
+            else
+            {
+                data.darkMood = "yes";
+            }
+            context.Entry(data).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+           //Session["DarkMood"] = data.darkMood;
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult BanUser(int id)
         {
@@ -107,29 +143,44 @@ namespace BloodDonationProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(userInfo info)
+        public ActionResult Create(userInfo info, HttpPostedFileBase file)
         {
             var rand = new Random();
             bool EmailAlreadyAdded = context.userInfoes.Any(x => x.Email == info.Email);
-            bool PassAlreadyAdded = context.userInfoes.Any(x => x.Password == info.Password);
+            //bool PassAlreadyAdded = context.userInfoes.Any(x => x.Password == info.Password);
 
             if (EmailAlreadyAdded)
             {
                 TempData["EmailExist"] = "Email Already SignUp";
             }
-            if (PassAlreadyAdded)
-            {
-                TempData["PasswordExist"] = "Password Already SignUp";
-            }
-            if (!EmailAlreadyAdded && !PassAlreadyAdded)
-            {
-                TempData["DoneReg"] = "New User Added";
-                info.Password = rand.Next(50, 101).ToString();
-                context.userInfoes.Add(info);
-                context.SaveChanges();
-                return RedirectToAction("AfterReg",new { info.Email });
+            /*      if (PassAlreadyAdded)
+                  {
+                      TempData["PasswordExist"] = "Password Already SignUp";
+                  }*/
+            string path = null;
 
-            }
+                path = Path.Combine(Server.MapPath("~/App_Data"), Path.GetFileName(file.FileName));
+                file.SaveAs(path);
+                if (!EmailAlreadyAdded && path != null)
+                {
+
+                    TempData["DoneReg"] = "New User Added";
+                    info.Password = rand.Next(300, 901).ToString() + "azhe";
+                    info.Docoment = file.FileName;
+                    info.ProPic = file.FileName;
+                    context.userInfoes.Add(info);
+                    context.SaveChanges();
+                    return RedirectToAction("AfterReg", new { info.Email });
+                    //return RedirectToAction("AfterReg");
+
+                }
+                //TempData["TempPhoto"] = "Add Photo";
+
+              
+            
+
+      
+
             return View();
         }
 
@@ -137,9 +188,9 @@ namespace BloodDonationProject.Controllers
 
         [HttpGet]
 
-        public ActionResult Print()
+        public ActionResult Print(string email)
         {
-            return new ActionAsPdf("AfterReg")
+            return new ActionAsPdf("AfterReg",new {email = email })
             {
                 FileName = Server.MapPath("~/App_Data/ListProduct.pdf")
             };

@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="50fdc9d52570412cb4161606d3bd0774" Name="Diagram1">
+      <Diagram DiagramId="29429cd5291f4b878b6484b12859463a" Name="Diagram1">
         <EntityTypeShape EntityType="BloodDonationDBModel.bannedUser" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BloodDonationDBModel.Post" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BloodDonationDBModel.report" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BloodDonationDBModel.userInfo" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodDonationDBModel.userInfo" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="BloodDonationDBModel.FK_Posts_Posts" ManuallyRouted="false" />
         <AssociationConnector Association="BloodDonationDBModel.FK_Posts_userInfo" ManuallyRouted="false" />
         <AssociationConnector Association="BloodDonationDBModel.FK_reports_DonorID" ManuallyRouted="false" />

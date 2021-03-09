@@ -53,6 +53,7 @@
     <Property Name="ReportCounter" Type="Int32" />
     <Property Name="BanStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="isVerified" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="darkMood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_userInfo" FromRole="userInfo" ToRole="Posts" />
     <NavigationProperty Name="reports" Relationship="Self.FK_reports_DonorID" FromRole="userInfo" ToRole="reports" />
     <NavigationProperty Name="reports1" Relationship="Self.FK_reports_userID" FromRole="userInfo" ToRole="reports" />
@@ -119,7 +120,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BloodDonationDBEntities6" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="BloodDonationDBEntities7" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
     <EntitySet Name="Posts" EntityType="Self.Post" />
     <EntitySet Name="reports" EntityType="Self.report" />

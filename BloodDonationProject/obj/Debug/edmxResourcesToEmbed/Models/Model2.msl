@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities6">
+  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities7">
     <EntitySetMapping Name="bannedUsers">
       <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
         <MappingFragment StoreEntitySet="bannedUser">
@@ -51,6 +51,7 @@
           <ScalarProperty Name="ReportCounter" ColumnName="ReportCounter" />
           <ScalarProperty Name="BanStatus" ColumnName="BanStatus" />
           <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="darkMood" ColumnName="darkMood" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
