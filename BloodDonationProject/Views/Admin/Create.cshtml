@@ -103,24 +103,14 @@
                     </td>
                 </tr>
 
-                <tr class="form-group">
-                    <td>
-                        @Html.LabelFor(model => model.Docoment, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </td>
-                    <td class="col-md-10">
-                        <input type="file" name="file" id="file" /><br><br>
-                        @TempData["TempPhoto"]
-                    </td>
-                </tr>
 
                 <tr class="form-group">
                     <td>
                         @Html.LabelFor(model => model.ProPic, htmlAttributes: new { @class = "control-label col-md-2" })
                     </td>
                     <td class="col-md-10">
-                        @Html.EditorFor(model => model.ProPic, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ProPic, "", new { @class = "text-danger" })
-                    </td>
+                         <input type="file" name="file" id="file" /><br><br>
+                        @TempData["TempPhoto"]
                 </tr>
 
                 <tr class="form-group">

@@ -32,6 +32,7 @@ namespace BloodDonationProject.Controllers
     
         public ActionResult AfterReg(string email)
         {
+
             var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
 
             return View(context.userInfoes.Find(data.userID));
@@ -44,7 +45,22 @@ namespace BloodDonationProject.Controllers
 
         public ActionResult RepoterInfo(int id )
         {
+            //var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+
+            ViewData["Reports"] = context.reports.Where(r => r.DonorId == id).ToList();
+
             return View(context.userInfoes.Where(r => r.userID == id));
+        }
+        public ActionResult RepoterInfoFilter(string email)
+        {
+
+            var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+
+            return RedirectToAction("RepoterInfo",new {id=data.userID });
+        }
+        public ActionResult banUsersList()
+        {
+            return View(context.bannedUsers.ToList());
         }
 
         public ActionResult RepoterHistory(int id)
@@ -134,6 +150,17 @@ namespace BloodDonationProject.Controllers
             context.SaveChanges();
             return RedirectToAction("showReports");
         }
+        [HttpGet]
+        public ActionResult UnBanUser(string email)
+        {
+            /* bannedUser bu = new bannedUser();
+             var userDum = context.bannedUsers.Where(b => b.Email == email).ToList();*/
+
+            var data = context.bannedUsers.Where(r => r.Email == email).FirstOrDefault<bannedUser>();
+            /*context.bannedUsers.Remove(context.bannedUsers.Find(data.id));
+            context.SaveChanges();*/
+            return RedirectToAction("banUsersList");
+        }
 
         [HttpGet]
 
@@ -159,7 +186,7 @@ namespace BloodDonationProject.Controllers
                   }*/
             string path = null;
 
-                path = Path.Combine(Server.MapPath("~/App_Data"), Path.GetFileName(file.FileName));
+                path = Path.Combine(Server.MapPath("~/Content/Images/"), Path.GetFileName(file.FileName));
                 file.SaveAs(path);
                 if (!EmailAlreadyAdded && path != null)
                 {
@@ -196,11 +223,18 @@ namespace BloodDonationProject.Controllers
             };
         }
 
-       
 
-     
-    }
+   
+       /* public ActionResult banUserDetiels(string email)
+        { }*/
+
+
+
+
+
+
+        }
 
        
        
-    }
+ }

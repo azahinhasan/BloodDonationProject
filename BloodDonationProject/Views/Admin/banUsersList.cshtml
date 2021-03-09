@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BloodDonationProject.Models.bannedUser>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>banUsersList</title>
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BannedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.duration)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BannedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.duration)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "RepoterInfoFilter", new { email = item.Email })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

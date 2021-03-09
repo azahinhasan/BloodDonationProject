@@ -69,7 +69,6 @@ C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\b
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\bin\System.Web.Helpers.xml
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\bin\System.Web.Mvc.xml
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.csprojAssemblyReference.cache
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.csproj.CoreCompileInputs.cache
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.csproj.CopyComplete
 C:\Users\zahin\Desktop\Study\APS.net\BloodDonationProject\BloodDonationProject\obj\Debug\BloodDonationProject.dll
