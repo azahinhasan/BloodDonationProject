@@ -41,7 +41,7 @@
                 </td>
                 <td>
                     |
-                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, id2 = item.UserId }) |
+                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, email = item.userInfo.Email }) |
                 </td>
             </tr>
         }

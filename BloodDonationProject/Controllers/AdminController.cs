@@ -43,9 +43,20 @@ namespace BloodDonationProject.Controllers
             return View(context.reports.ToList());
         }
 
-        public ActionResult RepoterInfo(int id )
+        public ActionResult RepoterInfo(int id,string email )
         {
             //var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+
+            bool BanCheck = context.bannedUsers.Any(x => x.Email == email);
+
+            if (BanCheck)
+            {
+                Session["userban"] = true;
+            }
+            else
+            {
+                Session["userban"] = false;
+            }
 
             ViewData["Reports"] = context.reports.Where(r => r.DonorId == id).ToList();
 
@@ -56,7 +67,7 @@ namespace BloodDonationProject.Controllers
 
             var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
 
-            return RedirectToAction("RepoterInfo",new {id=data.userID });
+            return RedirectToAction("RepoterInfo",new {id=data.userID, email = email });
         }
         public ActionResult banUsersList()
         {
@@ -130,7 +141,6 @@ namespace BloodDonationProject.Controllers
         {
             DateTime utcDate = DateTime.Today;
             bannedUser bn = new bannedUser();
-
             var data = context.userInfoes.Where(r => r.userID == id).FirstOrDefault<userInfo>();
 
             bn.Email = data.Email;
@@ -138,17 +148,13 @@ namespace BloodDonationProject.Controllers
             bn.duration = 0;
             bn.BannedDate = utcDate;
 
-            if (data.BanStatus!="true")
-            {
+
                 context.bannedUsers.Add(bn);
                 context.SaveChanges();
-                data.BanStatus = "true";
                 context.Entry(data).State = System.Data.Entity.EntityState.Modified;
-            }
-
 
             context.SaveChanges();
-            return RedirectToAction("showReports");
+            return RedirectToAction("banUsersList");
         }
         [HttpGet]
         public ActionResult UnBanUser(string email)
@@ -157,8 +163,8 @@ namespace BloodDonationProject.Controllers
              var userDum = context.bannedUsers.Where(b => b.Email == email).ToList();*/
 
             var data = context.bannedUsers.Where(r => r.Email == email).FirstOrDefault<bannedUser>();
-            /*context.bannedUsers.Remove(context.bannedUsers.Find(data.id));
-            context.SaveChanges();*/
+            context.bannedUsers.Remove(context.bannedUsers.Find(data.id));
+            context.SaveChanges();
             return RedirectToAction("banUsersList");
         }
 
@@ -202,11 +208,6 @@ namespace BloodDonationProject.Controllers
 
                 }
                 //TempData["TempPhoto"] = "Add Photo";
-
-              
-            
-
-      
 
             return View();
         }

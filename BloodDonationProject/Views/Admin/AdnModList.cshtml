@@ -7,8 +7,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
+
     <title>AdnModList</title>
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -28,6 +29,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                Age
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Type)
@@ -65,7 +69,10 @@
                 </td>
                 <td>
                     @* @Html.DisplayFor(modelItem => item.DOB.ToString("dd/MM/yyyy"))*@
-                    @item.DOB.ToString("dd/MM/yyyy")
+                    @item.DOB.ToString("dd/MM/yy")
+                </td>
+                <td>
+                    @((int.Parse(DateTime.Now.ToString("yyyyMMdd"))- int.Parse(item.DOB.ToString("yyyyMMdd")))/10000 )
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)

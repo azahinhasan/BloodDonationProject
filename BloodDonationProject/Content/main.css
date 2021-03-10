@@ -1,48 +1,10 @@
-﻿Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@azahinhasan 
-azahinhasan
-/
-BloodDonationProject
-1
-01
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-BloodDonationProject/BloodDonationProject/Content/main.css
-@azahinhasan
-azahinhasan file upload added
-Latest commit ae9f2be 8 hours ago
- History
- 1 contributor
-39 lines (37 sloc)  688 Bytes
-  
-﻿body {
-    background-color:whitesmoke;
-}
-table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
- td, th {
+﻿td,th {
     border: 1px solid #ddd;
     padding: 8px;
 }
+
 tr:nth-child(even) {
-    background-color: floralwhite;
+    background-color: #f2f2f2;
 }
 
 tr:hover {
@@ -53,30 +15,6 @@ th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: mediumvioletred;
+    background-color: orangered;
     color: white;
 }
-.button {
-    background-color: #4CAF50; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

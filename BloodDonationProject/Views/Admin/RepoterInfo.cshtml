@@ -107,8 +107,9 @@
                     @Html.DisplayFor(modelItem => item.BloodGroup)
                 </td>
                 <td>
-                    @Html.ActionLink("UnBan", "UnBanUser", new { email = item.Email })
-                    @Html.ActionLink("Ban", "BanUser", new { id = item.userID })
+                    <p style="display:@(System.Convert.ToBoolean(Session["userban"])== true ? "block":"none")">@Html.ActionLink("UnBan", "UnBanUser", new { email = item.Email })</p>
+                    <p style="display:@(System.Convert.ToBoolean(Session["userban"])== false ? "block":"none")">@Html.ActionLink("Ban", "BanUser", new { id = item.userID })</p>
+                   
                 </td>
             </tr>
         }
