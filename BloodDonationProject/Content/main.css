@@ -3,9 +3,7 @@
     padding: 8px;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+
 
 tr:hover {
     background-color: #ddd;
@@ -19,9 +17,9 @@ th {
     color: white;
 }
 
-table{
-    margin-left:auto;
-    margin-right:auto;
+table {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1,h2{
