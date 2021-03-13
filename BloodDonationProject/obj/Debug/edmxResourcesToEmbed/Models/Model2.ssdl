@@ -10,6 +10,16 @@
     <Property Name="BannedDate" Type="datetime" />
     <Property Name="duration" Type="int" />
   </EntityType>
+  <EntityType Name="contactUs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Massage" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Posts">
     <Key>
       <PropertyRef Name="PostID" />
@@ -112,6 +122,7 @@
   </Association>
   <EntityContainer Name="BloodDonationDBModelStoreContainer">
     <EntitySet Name="bannedUser" EntityType="Self.bannedUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="contactUs" EntityType="Self.contactUs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities7">
+  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities9">
     <EntitySetMapping Name="bannedUsers">
       <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
         <MappingFragment StoreEntitySet="bannedUser">
@@ -9,6 +9,17 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="BannedDate" ColumnName="BannedDate" />
           <ScalarProperty Name="duration" ColumnName="duration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contactUs">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.contactU">
+        <MappingFragment StoreEntitySet="contactUs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Massage" ColumnName="Massage" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

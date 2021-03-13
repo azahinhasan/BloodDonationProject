@@ -13,18 +13,27 @@
     <title>showReports</title>
 </head>
 <body>
+    <h2>Reports List</h2>
+    @using (Html.BeginForm("searchReports", "Admin"))
+    {
+        <div style="margin:0px 40%">
+            <input type="text" id="email" name="email" />
+            <input type="submit" value="Search" class="btn btn-default" style="margin:0px 50px" />
+            <p style="color:red">@TempData["searchReportsError"]</p>
+        </div>
+    }
     <table class="table">
         <tr>
             <th>
                 Report
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.userInfo.Name)
+                Donar Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.userInfo1.Name)
+                Reporter Name
             </th>
-            <th></th>
+            <th>Acion</th>
         </tr>
 
         @foreach (var item in Model)
@@ -40,8 +49,8 @@
                     @Html.DisplayFor(modelItem => item.userInfo1.Name)
                 </td>
                 <td>
-                    |
-                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, email = item.userInfo.Email }) |
+                    
+                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, email = item.userInfo.Email }) 
                 </td>
             </tr>
         }

@@ -120,11 +120,15 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\bannedUser.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contactU.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model2.Context.cs">
@@ -174,6 +178,13 @@
     <Content Include="Views\Admin\AdnModList.cshtml" />
     <Content Include="Views\Admin\AfterReg.cshtml" />
     <Content Include="Views\Admin\banUsersList.cshtml" />
+    <Content Include="Views\Admin\searchBanUser.cshtml" />
+    <Content Include="Views\Admin\searchReports.cshtml" />
+    <Content Include="Views\Admin\CreateContactUs.cshtml" />
+    <Content Include="Views\Admin\Pie.cshtml" />
+    <Content Include="Views\Admin\Bar.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
+    <Content Include="Views\Shared\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

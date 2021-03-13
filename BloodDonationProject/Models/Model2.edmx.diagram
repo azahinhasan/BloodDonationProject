@@ -4,8 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="29429cd5291f4b878b6484b12859463a" Name="Diagram1">
+      <Diagram DiagramId="e071b4fc766b48e6a25ef5c83d20d0d6" Name="Diagram1">
         <EntityTypeShape EntityType="BloodDonationDBModel.bannedUser" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodDonationDBModel.contactU" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BloodDonationDBModel.Post" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BloodDonationDBModel.report" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BloodDonationDBModel.userInfo" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BloodDonationProject.Models.report>
+<head>
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
+</head>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<h2>Reports List</h2>
+@using (Html.BeginForm("searchReports", "Admin"))
+{
+    <div style="margin:0px 40%">
+        <input type="text" id="email" name="email" />
+        <input type="submit" value="Search" class="btn btn-default" style="margin:0px 50px" />
+        <p style="color:red">@TempData["searchReportsError"]</p>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Report
+        </th>
+        <th>
+            Donar Name
+        </th>
+        <th>
+            Reporter Name
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Report1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userInfo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userInfo1.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, email = item.userInfo.Email })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -18,3 +18,15 @@ th {
     background-color: orangered;
     color: white;
 }
+
+table{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+h1,h2{
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+    color:indianred;
+}

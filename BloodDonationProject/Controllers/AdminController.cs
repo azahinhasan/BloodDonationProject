@@ -13,7 +13,7 @@ namespace BloodDonationProject.Controllers
 {
     public class AdminController : Controller
     {
-        Models.BloodDonationDBEntities7 context = new Models.BloodDonationDBEntities7();
+        Models.BloodDonationDBEntities9 context = new Models.BloodDonationDBEntities9();
         // GET: Admin
         public ActionResult Index()
         {
@@ -79,11 +79,41 @@ namespace BloodDonationProject.Controllers
             return View(context.reports.Where(r => r.DonorId == id));
         }
 
-     
+        [HttpPost]
+        public ActionResult searchBanUser(string email)
+        {
+
+            @Session["searchBanUser"] = email;
+            // return View(context.reports.Where(r => r.DonorId == id));
+            var data = context.bannedUsers.Where(r => r.Email == email).ToList();
+            if(!data.Any())
+            {
+                TempData["searchBanUserError"] = "Not Found";
+                return RedirectToAction("banUsersList");
+            }
+
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult searchReports(string email)
+        {
+
+            // return View(context.reports.Where(r => r.DonorId == id));
+            var data = context.reports.Where(r => r.userInfo.Email == email).ToList();
+            if (!data.Any())
+            {
+                TempData["searchReportsError"] = "Not Found";
+                return RedirectToAction("banUsersList");
+            }
+
+            return View(data);
+        }
+
         public ActionResult AdnModList()
         {
 
-
+           
             //var data = context.userInfoes.Where(r => r.Type == "Admin").FirstOrDefault<userInfo>();
             //Moderator
 
@@ -212,10 +242,23 @@ namespace BloodDonationProject.Controllers
             return View();
         }
 
- 
-
         [HttpGet]
 
+        public ActionResult CreateContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateContactUs(contactU info)
+        {
+            context.contactUs.Add(info);
+            context.SaveChanges();
+            TempData["contactUsDone"] = "Thanks for your Info";
+            return RedirectToAction("CreateContactUs");
+        }
+
+        [HttpGet]
         public ActionResult Print(string email)
         {
             return new ActionAsPdf("AfterReg",new {email = email })
@@ -225,16 +268,70 @@ namespace BloodDonationProject.Controllers
         }
 
 
-   
-       /* public ActionResult banUserDetiels(string email)
-        { }*/
+
+        /* public ActionResult banUserDetiels(string email)
+         { }*/
 
 
 
 
 
-
+        public ActionResult Pie()
+        {
+            return View();
         }
+
+        public ActionResult Bar()
+        {
+            return View();
+        }
+
+        public class Part 
+        {
+            public string Employee { get; set; }
+
+            public int Credit { get; set; }
+        }
+
+            [HttpPost]
+        public JsonResult NewChart()
+        {
+            List<Part> iData = new List<Part>();
+            //Creating sample data  
+            //DataTable dt = new DataTable();
+            /*        dt.Columns.Add("Employee", System.Type.GetType("System.String"));
+                    dt.Columns.Add("Credit", System.Type.GetType("System.Int32"));
+
+                    DataRow dr = dt.NewRow();
+                    dr["Employee"] = "Sam";
+                    dr["Credit"] = 123;
+                    dt.Rows.Add(dr);
+
+                    dr = dt.NewRow();
+                    dr["Employee"] = "Alex";
+                    dr["Credit"] = 456;
+                    dt.Rows.Add(dr);
+
+                    dr = dt.NewRow();
+                    dr["Employee"] = "Michael";
+                    dr["Credit"] = 587;
+                    dt.Rows.Add(dr);*/
+
+            //Looping and extracting each DataColumn to List<Object>  
+            /*   foreach (DataColumn dc in dt.Columns)
+               {
+                   List<object> x = new List<object>();
+                   x = (from DataRow drr in dt.Rows select drr[dc.ColumnName]).ToList();
+                   iData.Add(x);
+               }*/
+            //Source data returned as JSON  
+            iData.Add(new Part() { Employee = "crank arm", Credit = 123 });
+            iData.Add(new Part() { Employee = "caaa", Credit = 523 });
+
+            return Json(iData, JsonRequestBehavior.AllowGet);
+        }
+
+    }
 
        
        

@@ -10,6 +10,16 @@
     <Property Name="BannedDate" Type="DateTime" Precision="3" />
     <Property Name="duration" Type="Int32" />
   </EntityType>
+  <EntityType Name="contactU">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Massage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <EntityType Name="Post">
     <Key>
       <PropertyRef Name="PostID" />
@@ -120,8 +130,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BloodDonationDBEntities7" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="BloodDonationDBEntities9" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
+    <EntitySet Name="contactUs" EntityType="Self.contactU" />
     <EntitySet Name="Posts" EntityType="Self.Post" />
     <EntitySet Name="reports" EntityType="Self.report" />
     <EntitySet Name="userInfoes" EntityType="Self.userInfo" />

@@ -9,22 +9,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>banUsersList</title>
+    <title>searchBanUser</title>
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <h2>Ban User List</h2>
     @using (Html.BeginForm("searchBanUser", "Admin"))
     {
-    <div style="margin:0px 40%">
-        <input type="text" id="email" name="email"/>
-        <input type="submit" value="Search" class="btn btn-default" style="margin:0px 50px"/>
-         <p style="color:red">@TempData["searchBanUserError"]</p>
-    </div>
+        <div style="margin:0px 40%">
+            <input type="text" id="email" name="email" />
+            <input type="submit" value="Search" class="btn btn-default" style="margin:0px 50px" />
+        </div>
     }
-   
-
-    <table >
+    <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -63,8 +60,5 @@
         }
 
     </table>
-
-
-
 </body>
 </html>

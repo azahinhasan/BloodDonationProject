@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/CTable.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @RenderSection("head", false)
+    <style>
+        .modal-content {
+            width: 600px !important;
+            margin: 30px auto !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container body-content">
+
+        @RenderBody()
+
+
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

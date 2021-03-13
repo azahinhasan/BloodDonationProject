@@ -15,6 +15,16 @@
           <Property Name="BannedDate" Type="datetime" />
           <Property Name="duration" Type="int" />
         </EntityType>
+        <EntityType Name="contactUs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Massage" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Posts">
           <Key>
             <PropertyRef Name="PostID" />
@@ -117,6 +127,7 @@
         </Association>
         <EntityContainer Name="BloodDonationDBModelStoreContainer">
           <EntitySet Name="bannedUser" EntityType="Self.bannedUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contactUs" EntityType="Self.contactUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
@@ -155,6 +166,16 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="BannedDate" Type="DateTime" Precision="3" />
           <Property Name="duration" Type="Int32" />
+        </EntityType>
+        <EntityType Name="contactU">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Massage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -266,8 +287,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BloodDonationDBEntities7" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BloodDonationDBEntities9" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
+          <EntitySet Name="contactUs" EntityType="Self.contactU" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
           <EntitySet Name="reports" EntityType="Self.report" />
           <EntitySet Name="userInfoes" EntityType="Self.userInfo" />
@@ -297,7 +319,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities7">
+        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities9">
           <EntitySetMapping Name="bannedUsers">
             <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
               <MappingFragment StoreEntitySet="bannedUser">
@@ -306,6 +328,17 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="BannedDate" ColumnName="BannedDate" />
                 <ScalarProperty Name="duration" ColumnName="duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contactUs">
+            <EntityTypeMapping TypeName="BloodDonationDBModel.contactU">
+              <MappingFragment StoreEntitySet="contactUs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Massage" ColumnName="Massage" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
