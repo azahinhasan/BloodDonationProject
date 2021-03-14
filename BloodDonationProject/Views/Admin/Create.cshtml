@@ -19,11 +19,11 @@
     <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
         <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("All Reporst", "showReports")</span>
-        <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor List", "AdnModList")</span>
-        <a style="margin: 10px 10px" href="/">See FeedBacks</a>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe  List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList")</span>
         <a style="margin: 10px 10px" href="/">Other Users Info</a>
         <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
-        @*<a style="margin: 10px 10px" href="@Url.Action("darkMood","Admin")">Dark Mood</a>*@
+       
         @Html.ActionLink("Dark Mood", "darkMood")
     </nav>
 

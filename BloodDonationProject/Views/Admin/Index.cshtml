@@ -15,8 +15,11 @@
     
     <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
         <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
-        <span style="margin: 10px 10px"> @Html.ActionLink("All Reporst", "showReports")</span>
-        <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index","Chart")</span>
         <a style="margin: 10px 10px" href="/">See FeedBacks</a>
         <a style="margin: 10px 10px" href="/">Other Users Info</a>
         <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
@@ -25,10 +28,12 @@
     </nav>
 
 
-    <div>
-        <p>SS : @Session["Email"] -- </p>
+    <div style="text-align:center; font-size:40px">
 
-        It is Admin Profile.
+        <p> It is @Session["Type"] Profile.</p>
+        <p>Account Login with @Session["Email"]</p>
+        <p>Please Choose Option From Nav Bar</p>
+
     </div>
 </body>
 </html>

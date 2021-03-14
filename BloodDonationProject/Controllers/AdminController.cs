@@ -242,6 +242,11 @@ namespace BloodDonationProject.Controllers
             return View();
         }
 
+        public ActionResult CreateContactUsList()
+        {
+            return View(context.contactUs.ToList());
+        }
+
         [HttpGet]
 
         public ActionResult CreateContactUs()
