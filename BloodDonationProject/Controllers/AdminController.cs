@@ -149,6 +149,50 @@ namespace BloodDonationProject.Controllers
             return View(context.userInfoes.Where(r => r.Type == "Admin" | r.Type == "Moderator"));
         }
 
+        public ActionResult DonnerList()
+        {
+            /*if (Session["ValidType"] != "AdMo")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
+
+            }*/
+
+
+            //var data = context.userInfoes.Where(r => r.Type == "Admin").FirstOrDefault<userInfo>();
+            //Moderator
+
+            return View(context.userInfoes.Where(r => r.Type == "Donner"));
+        }
+
+        public ActionResult DonnerInfo(int id)
+        {
+
+            return View(context.userInfoes.Where(r => r.userID == id));
+        }
+
+        public ActionResult DonnerVarify(int id)
+        {
+            var data = context.userInfoes.Where(r => r.userID == id).FirstOrDefault<userInfo>();
+            //Moderator
+
+            if (data.isVerified == "yes")
+            {
+                data.isVerified = "no";
+            }
+            else
+            {
+                data.isVerified = "yes";
+            }
+
+            context.Entry(data).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+
+            return RedirectToAction("DonnerInfo",new {id = id });
+
+           //return View(context.userInfoes.Where(r => r.userID == id));
+        }
+
         public ActionResult typeChage(int id)
         {
 

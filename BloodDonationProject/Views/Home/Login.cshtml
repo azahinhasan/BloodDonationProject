@@ -12,8 +12,7 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    
-    
+
     @using (Html.BeginForm()) 
     {
         @Html.AntiForgeryToken()
@@ -40,7 +39,6 @@
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <p>@TempData["errorLogin"]</p>
 
     <div class="form-group">
@@ -48,7 +46,6 @@
             <input type="submit" value="Login" class="btn btn-default" />
         </div>
     </div>
-
     <p>@Session["Type"]</p>
 </div>
     }
