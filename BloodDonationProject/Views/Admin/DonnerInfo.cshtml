@@ -54,7 +54,7 @@
                     @Html.DisplayFor(modelItem => item.DOB)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProPic)
+                    <img src="~/Content/Images/@item.ProPic" alt="proPic" height="80px" width="80px" style="margin:05px 25px" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BloodGroup)
@@ -72,13 +72,14 @@
 
                 </td>
             </tr>
-            <div style="margin: 0px 40%; position:absolute; top:18%; text-align:center">
+            <div style="margin: 0px 550px; position:absolute; top:22%; text-align:center">
                 <h3>Docoment</h3>
-                <img src="~/Content/DocImage/@item.Docoment" alt="proPic" height="420px" width="400px" style="margin:05px 25px" />
+              @*  <img src="~/Content/DocImage/@item.Docoment" alt="proPic" height="420px" width="400px" style="margin:05px 25px" />*@
+                <embed src="~/Content/Doc/@item.Docoment" width="800px" height="800px" />
             </div>
 
 
-
+         
 
         }
 

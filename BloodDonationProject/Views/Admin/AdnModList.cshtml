@@ -27,6 +27,9 @@
     <table>
         <tr>
             <th>
+                Picture
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -48,9 +51,6 @@
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProPic)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.BloodGroup)
             </th>
             <th>
@@ -63,6 +63,9 @@
             if (item.Email != Session["Email"].ToString()) //Session["Email"].ToString()
             {
                 <tr>
+                    <td>
+                        <img src="~/Content/Images/@item.ProPic" alt="proPic" height="80px" width="80px" style="margin:05px 25px" />
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -85,9 +88,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Type)
                     </td>
-                    <td>
-                        <img src="~/Content/Images/@item.ProPic" alt="proPic" height="80px" width="80px" style="margin:05px 25px" />
-                    </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.BloodGroup)
                     </td>
