@@ -13,11 +13,11 @@ namespace BloodDonationProject.Controllers
 {
     public class AdminController : Controller
     {
-        Models.BloodDonationDBEntities9 context = new Models.BloodDonationDBEntities9();
+        Models.BloodDonationDBEntities10 context = new Models.BloodDonationDBEntities10();
         // GET: Admin
         public ActionResult Index()
         {
-            if(Session["Email"] == null || Session["Type"].ToString() != "Admin")
+            if (Session["ValidType"] != "AdMo")
             {
                 return RedirectToAction("Login", "Home");
             }
@@ -26,6 +26,7 @@ namespace BloodDonationProject.Controllers
             var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
 
             Session["DarkMood"] = data.darkMood;
+           // Session["DarkMood"] = "no";
             return View();
         }
 
@@ -40,8 +41,17 @@ namespace BloodDonationProject.Controllers
 
         public ActionResult showReports()
         {
-            return View(context.reports.ToList());
-        }
+
+            if (Session["ValidType"] != "AdMo")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
+                
+            }
+
+                return View(context.reports.ToList());
+
+            }
 
         public ActionResult RepoterInfo(int id,string email )
         {
@@ -71,12 +81,25 @@ namespace BloodDonationProject.Controllers
         }
         public ActionResult banUsersList()
         {
+            if (Session["ValidType"] != "AdMo")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
+                
+            }
             return View(context.bannedUsers.ToList());
         }
 
         public ActionResult RepoterHistory(int id)
         {
+            if (Session["ValidType"] != "AdMo")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
+                
+            }
             return View(context.reports.Where(r => r.DonorId == id));
+
         }
 
         [HttpPost]
@@ -112,8 +135,14 @@ namespace BloodDonationProject.Controllers
 
         public ActionResult AdnModList()
         {
+            if (Session["ValidType"] != "AdMo")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
 
-           
+            }
+
+
             //var data = context.userInfoes.Where(r => r.Type == "Admin").FirstOrDefault<userInfo>();
             //Moderator
 
@@ -202,6 +231,12 @@ namespace BloodDonationProject.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Type"] != "Admin")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
+
+            }
             return View();
         }
 
@@ -229,8 +264,9 @@ namespace BloodDonationProject.Controllers
 
                     TempData["DoneReg"] = "New User Added";
                     info.Password = rand.Next(300, 901).ToString() + "azhe";
-                    info.Docoment = file.FileName;
+                    info.Docoment = "none";
                     info.ProPic = file.FileName;
+                    info.darkMood = "no";
                     context.userInfoes.Add(info);
                     context.SaveChanges();
                     return RedirectToAction("AfterReg", new { info.Email });
@@ -244,6 +280,12 @@ namespace BloodDonationProject.Controllers
 
         public ActionResult CreateContactUsList()
         {
+            if (Session["ValidType"] != "AdMo")
+            {
+                TempData["errorLogin"] = "Have To Login First";
+                return RedirectToAction("Login", "Home");
+
+            }
             return View(context.contactUs.ToList());
         }
 
@@ -262,6 +304,26 @@ namespace BloodDonationProject.Controllers
             TempData["contactUsDone"] = "Thanks for your Info";
             return RedirectToAction("CreateContactUs");
         }
+        public ActionResult CreateContactUsDelete(int id)
+        {
+
+            context.contactUs.Remove(context.contactUs.Find(id));
+            context.SaveChanges();
+            return RedirectToAction("CreateContactUsList");
+
+        }
+        public ActionResult CreateContactUsAbout(string email)
+            {
+
+            var data = context.userInfoes.Where(r => r.Email == email).FirstOrDefault<userInfo>();
+            if (data != null)
+            {
+                return RedirectToAction("RepoterInfo",new { id = data.userID , email = data.Email });
+            }
+
+            return RedirectToAction("DataNotFound");
+            }
+
 
         [HttpGet]
         public ActionResult Print(string email)
@@ -277,9 +339,40 @@ namespace BloodDonationProject.Controllers
         /* public ActionResult banUserDetiels(string email)
          { }*/
 
+        [HttpGet]
+        public ActionResult DataNotFound()
+        {
+            return View();
+        }
 
+        public ActionResult UnBanAllView()
+        {
+            return View();
+        }
 
+   
+        public ActionResult UnBanAll()
+        {
+            var data = context.bannedUsers.ToList();
+            int counter = 0;
+            foreach (var i in data)
+            {
+                DateTime dt = (DateTime)i.BannedDate;
+                int comp = int.Parse(DateTime.Now.ToString("yyyyMMdd")) - int.Parse(dt.ToString("yyyyMMdd"));
 
+                if (comp / 10000 >= 1)
+                {
+                    counter++;
+                    context.bannedUsers.Remove(context.bannedUsers.Find(i.id));
+                    context.SaveChanges();
+                }
+            }
+
+            TempData["TotalUnbanded"] = counter;
+
+            return RedirectToAction("UnBanAllView");
+            //return RedirectToAction("DataNotFound");
+        }
 
         public ActionResult Pie()
         {

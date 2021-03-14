@@ -186,6 +186,8 @@
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\Admin\CreateContactUsList.cshtml" />
+    <Content Include="Views\Admin\DataNotFound.cshtml" />
+    <Content Include="Views\Admin\UnBanAllView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

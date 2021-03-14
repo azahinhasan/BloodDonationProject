@@ -130,7 +130,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BloodDonationDBEntities9" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="BloodDonationDBEntities10" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
     <EntitySet Name="contactUs" EntityType="Self.contactU" />
     <EntitySet Name="Posts" EntityType="Self.Post" />

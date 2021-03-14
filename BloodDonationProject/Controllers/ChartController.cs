@@ -9,7 +9,7 @@ namespace BloodDonationProject.Controllers
 {
     public class ChartController : Controller
     {
-        Models.BloodDonationDBEntities9 context = new Models.BloodDonationDBEntities9();
+        Models.BloodDonationDBEntities10 context = new Models.BloodDonationDBEntities10();
         //
         // GET: /Chart/
 

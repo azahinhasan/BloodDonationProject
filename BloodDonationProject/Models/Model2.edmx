@@ -287,7 +287,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BloodDonationDBEntities9" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BloodDonationDBEntities10" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
           <EntitySet Name="contactUs" EntityType="Self.contactU" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
@@ -319,7 +319,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities9">
+        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities10">
           <EntitySetMapping Name="bannedUsers">
             <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
               <MappingFragment StoreEntitySet="bannedUser">

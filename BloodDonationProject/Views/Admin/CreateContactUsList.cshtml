@@ -35,7 +35,10 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+
+            @Html.ActionLink("Delete", "CreateContactUsDelete", new { id = item.id }) | | 
+            @Html.ActionLink("About", "CreateContactUsAbout", new { Email = item.Email })
+
         </td>
     </tr>
 }

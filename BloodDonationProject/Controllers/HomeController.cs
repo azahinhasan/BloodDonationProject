@@ -11,7 +11,7 @@ namespace BloodDonationProject.Controllers
 {
     public class HomeController : Controller
     {
-        Models.BloodDonationDBEntities9 context = new Models.BloodDonationDBEntities9();
+        Models.BloodDonationDBEntities10 context = new Models.BloodDonationDBEntities10();
         // GET: Home
         public ActionResult Index()
         {
@@ -35,10 +35,10 @@ namespace BloodDonationProject.Controllers
             bool DonorisValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "Donor");
 
             bool BanCheck = context.bannedUsers.Any(x => x.Email == Info.Email);
-
-
+            Session["Email"] = "";
+            Session["Type"] = "";
             //Session["Email"] = Info.Email;
-            if (AdminisValid || DonorisValid)
+            if (AdminisValid || DonorisValid || ModeratorValid)
             {
                 Session["Email"] = Info.Email;
               
@@ -54,12 +54,14 @@ namespace BloodDonationProject.Controllers
             {
                 //FormsAuthentication.SetAuthCookie(Info.Email, false);
                 Session["Type"] = "Admin";
+                Session["ValidType"] = "AdMo";
                 return RedirectToAction("Index" , "Admin");
             }
             if (ModeratorValid && !BanCheck)
             {
                 //FormsAuthentication.SetAuthCookie(Info.Email, false);
                 Session["Type"] = "Moderator";
+                Session["ValidType"] = "AdMo";
                 return RedirectToAction("Index", "Admin");
             }
 

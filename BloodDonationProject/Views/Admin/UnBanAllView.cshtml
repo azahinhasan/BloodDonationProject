@@ -1,0 +1,13 @@
+﻿@model BloodDonationProject.Models.bannedUser
+
+<head>
+
+</head>
+<body >
+    <div style="text-align:center; font-size:35px">
+
+        <p>Tolat Unbanned now: @TempData["TotalUnbanded"]</p>
+        <p>Click The Button For Acion</p>
+        <button> @Html.ActionLink("UnBanAll", "UnBanAll")</button>
+    </div>
+</body>
