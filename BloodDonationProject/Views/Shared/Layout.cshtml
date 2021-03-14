@@ -6,8 +6,7 @@
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
     @RenderSection("head", false)
 </head>
-<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
-               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
+<body>
 
     <div style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
         <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>

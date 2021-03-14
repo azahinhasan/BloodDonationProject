@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<BloodDonationProject.Models.report>
 
+
 @section css {
     <link href="~/Content/main.css" rel="stylesheet" />
 }
@@ -49,8 +50,8 @@
                     @Html.DisplayFor(modelItem => item.userInfo1.Name)
                 </td>
                 <td>
-                    
-                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, email = item.userInfo.Email }) 
+
+                    @Html.ActionLink("Details", "RepoterInfo", new { id = item.DonorId, email = item.userInfo.Email })
                 </td>
             </tr>
         }
