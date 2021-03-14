@@ -45,6 +45,25 @@
           <Property Name="DonorId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="January" Type="varchar" MaxLength="50" />
+          <Property Name="February" Type="varchar" MaxLength="50" />
+          <Property Name="March" Type="varchar" MaxLength="50" />
+          <Property Name="April" Type="varchar" MaxLength="50" />
+          <Property Name="May" Type="varchar" MaxLength="50" />
+          <Property Name="June" Type="varchar" MaxLength="50" />
+          <Property Name="July" Type="varchar" MaxLength="50" />
+          <Property Name="August" Type="varchar" MaxLength="50" />
+          <Property Name="September" Type="varchar" MaxLength="50" />
+          <Property Name="October" Type="varchar" MaxLength="50" />
+          <Property Name="November" Type="varchar" MaxLength="50" />
+          <Property Name="December" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="userInfo">
           <Key>
             <PropertyRef Name="userID" />
@@ -64,6 +83,7 @@
           <Property Name="BanStatus" Type="varchar" MaxLength="50" />
           <Property Name="isVerified" Type="varchar" MaxLength="50" />
           <Property Name="darkMood" Type="varchar" MaxLength="50" />
+          <Property Name="Salary" Type="int" />
         </EntityType>
         <Association Name="FK_Posts_Posts">
           <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
@@ -113,6 +133,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Salary_userInfo">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_userInfo_Posts">
           <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
           <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
@@ -130,6 +162,7 @@
           <EntitySet Name="contactUs" EntityType="Self.contactUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
             <End Role="Posts" EntitySet="Posts" />
@@ -146,6 +179,10 @@
           <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
             <End Role="userInfo" EntitySet="userInfo" />
             <End Role="reports" EntitySet="reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_userInfo" Association="Self.FK_Salary_userInfo">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="Salary" EntitySet="Salary" />
           </AssociationSet>
           <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
             <End Role="userInfo" EntitySet="userInfo" />
@@ -202,6 +239,26 @@
           <NavigationProperty Name="userInfo" Relationship="Self.FK_reports_DonorID" FromRole="reports" ToRole="userInfo" />
           <NavigationProperty Name="userInfo1" Relationship="Self.FK_reports_userID" FromRole="reports" ToRole="userInfo" />
         </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="January" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="February" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="March" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="April" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="May" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="June" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="July" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="August" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="September" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="October" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="November" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="December" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="userInfo" Relationship="Self.FK_Salary_userInfo" FromRole="Salary" ToRole="userInfo" />
+        </EntityType>
         <EntityType Name="userInfo">
           <Key>
             <PropertyRef Name="userID" />
@@ -221,9 +278,11 @@
           <Property Name="BanStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="isVerified" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="darkMood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Int32" />
           <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_userInfo" FromRole="userInfo" ToRole="Posts" />
           <NavigationProperty Name="reports" Relationship="Self.FK_reports_DonorID" FromRole="userInfo" ToRole="reports" />
           <NavigationProperty Name="reports1" Relationship="Self.FK_reports_userID" FromRole="userInfo" ToRole="reports" />
+          <NavigationProperty Name="Salaries" Relationship="Self.FK_Salary_userInfo" FromRole="userInfo" ToRole="Salary" />
           <NavigationProperty Name="userInfo1" Relationship="Self.FK_userInfo_Posts" FromRole="userInfo" ToRole="userInfo1" />
           <NavigationProperty Name="userInfo2" Relationship="Self.FK_userInfo_Posts" FromRole="userInfo1" ToRole="userInfo" />
         </EntityType>
@@ -275,6 +334,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Salary_userInfo">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_userInfo_Posts">
           <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
           <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
@@ -287,11 +358,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BloodDonationDBEntities10" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BloodDonationDBEntities12" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bannedUsers" EntityType="Self.bannedUser" />
           <EntitySet Name="contactUs" EntityType="Self.contactU" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
           <EntitySet Name="reports" EntityType="Self.report" />
+          <EntitySet Name="Salaries" EntityType="Self.Salary" />
           <EntitySet Name="userInfoes" EntityType="Self.userInfo" />
           <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
             <End Role="Posts" EntitySet="Posts" />
@@ -309,6 +381,10 @@
             <End Role="userInfo" EntitySet="userInfoes" />
             <End Role="reports" EntitySet="reports" />
           </AssociationSet>
+          <AssociationSet Name="FK_Salary_userInfo" Association="Self.FK_Salary_userInfo">
+            <End Role="userInfo" EntitySet="userInfoes" />
+            <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
           <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
             <End Role="userInfo" EntitySet="userInfoes" />
             <End Role="userInfo1" EntitySet="userInfoes" />
@@ -319,7 +395,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities10">
+        <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities12">
           <EntitySetMapping Name="bannedUsers">
             <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
               <MappingFragment StoreEntitySet="bannedUser">
@@ -364,6 +440,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="BloodDonationDBModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="January" ColumnName="January" />
+                <ScalarProperty Name="February" ColumnName="February" />
+                <ScalarProperty Name="March" ColumnName="March" />
+                <ScalarProperty Name="April" ColumnName="April" />
+                <ScalarProperty Name="May" ColumnName="May" />
+                <ScalarProperty Name="June" ColumnName="June" />
+                <ScalarProperty Name="July" ColumnName="July" />
+                <ScalarProperty Name="August" ColumnName="August" />
+                <ScalarProperty Name="September" ColumnName="September" />
+                <ScalarProperty Name="October" ColumnName="October" />
+                <ScalarProperty Name="November" ColumnName="November" />
+                <ScalarProperty Name="December" ColumnName="December" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="userInfoes">
             <EntityTypeMapping TypeName="BloodDonationDBModel.userInfo">
               <MappingFragment StoreEntitySet="userInfo">
@@ -382,6 +478,7 @@
                 <ScalarProperty Name="BanStatus" ColumnName="BanStatus" />
                 <ScalarProperty Name="isVerified" ColumnName="isVerified" />
                 <ScalarProperty Name="darkMood" ColumnName="darkMood" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

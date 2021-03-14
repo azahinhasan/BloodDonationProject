@@ -20,6 +20,7 @@ namespace BloodDonationProject.Models
             this.Posts = new HashSet<Post>();
             this.reports = new HashSet<report>();
             this.reports1 = new HashSet<report>();
+            this.Salaries = new HashSet<Salary>();
         }
     
         public int userID { get; set; }
@@ -37,6 +38,7 @@ namespace BloodDonationProject.Models
         public string BanStatus { get; set; }
         public string isVerified { get; set; }
         public string darkMood { get; set; }
+        public Nullable<int> Salary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
@@ -44,6 +46,8 @@ namespace BloodDonationProject.Models
         public virtual ICollection<report> reports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<report> reports1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Salary> Salaries { get; set; }
         public virtual userInfo userInfo1 { get; set; }
         public virtual userInfo userInfo2 { get; set; }
     }

@@ -152,6 +152,9 @@
     <Compile Include="Models\report.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Salary.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\userInfo.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -188,6 +191,8 @@
     <Content Include="Views\Admin\CreateContactUsList.cshtml" />
     <Content Include="Views\Admin\DataNotFound.cshtml" />
     <Content Include="Views\Admin\UnBanAllView.cshtml" />
+    <Content Include="Views\Admin\SalaryList.cshtml" />
+    <Content Include="Views\Admin\SalaryListUpdate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

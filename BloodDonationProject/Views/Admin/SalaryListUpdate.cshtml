@@ -1,0 +1,192 @@
+﻿@model BloodDonationProject.Models.Salary
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<head>
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="form-horizontal">
+        <h4>Salary</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div style="background-color:orangered; text-align:center; color:white">
+
+            <div class="col-md-10">
+                Name:
+                @Model.userInfo.Name
+            </div>
+            <div class="col-md-10">
+                Position:
+                @Model.userInfo.Type
+
+            </div>
+        </div>
+        <div style="text-align:center; color:green;">
+            <p>@TempData["SalaryUpadated"]</p>
+        </div>
+
+        <br /><br />
+        <table border=1>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.January, htmlAttributes: new { @class = "control-label col-md-2" }) :
+                </td>
+                <td>
+                    <select name="January">
+                        <option selected=@(Model.January=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.January!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.February, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="February">
+                        <option selected=@(Model.February=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.February!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.March, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="March">
+                        <option selected=@(Model.March=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.March!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.April, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="April">
+                        <option selected=@(Model.April=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.April!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.May, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="May">
+                        <option selected=@(Model.May=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.May!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.June, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="June">
+                        <option selected=@(Model.June=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.June!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.July, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="July">
+                        <option selected=@(Model.July=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.July!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.August, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="August">
+                        <option selected=@(Model.August=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.August!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.September, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="September">
+                        <option selected=@(Model.September=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.September!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.October, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="October">
+                        <option selected=@(Model.October=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.October!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.November, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="November">
+                        <option selected=@(Model.November=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.November!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.December, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <select name="December">
+                        <option selected=@(Model.December=="Yes" ? true : false)>Yes</option>
+                        <option selected=@(Model.December!="Yes" ? true : false)>No</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+}

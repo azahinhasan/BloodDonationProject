@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities10">
+  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities12">
     <EntitySetMapping Name="bannedUsers">
       <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
         <MappingFragment StoreEntitySet="bannedUser">
@@ -45,6 +45,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Salaries">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="January" ColumnName="January" />
+          <ScalarProperty Name="February" ColumnName="February" />
+          <ScalarProperty Name="March" ColumnName="March" />
+          <ScalarProperty Name="April" ColumnName="April" />
+          <ScalarProperty Name="May" ColumnName="May" />
+          <ScalarProperty Name="June" ColumnName="June" />
+          <ScalarProperty Name="July" ColumnName="July" />
+          <ScalarProperty Name="August" ColumnName="August" />
+          <ScalarProperty Name="September" ColumnName="September" />
+          <ScalarProperty Name="October" ColumnName="October" />
+          <ScalarProperty Name="November" ColumnName="November" />
+          <ScalarProperty Name="December" ColumnName="December" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="userInfoes">
       <EntityTypeMapping TypeName="BloodDonationDBModel.userInfo">
         <MappingFragment StoreEntitySet="userInfo">
@@ -63,6 +83,7 @@
           <ScalarProperty Name="BanStatus" ColumnName="BanStatus" />
           <ScalarProperty Name="isVerified" ColumnName="isVerified" />
           <ScalarProperty Name="darkMood" ColumnName="darkMood" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

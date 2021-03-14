@@ -40,6 +40,25 @@
     <Property Name="DonorId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="January" Type="varchar" MaxLength="50" />
+    <Property Name="February" Type="varchar" MaxLength="50" />
+    <Property Name="March" Type="varchar" MaxLength="50" />
+    <Property Name="April" Type="varchar" MaxLength="50" />
+    <Property Name="May" Type="varchar" MaxLength="50" />
+    <Property Name="June" Type="varchar" MaxLength="50" />
+    <Property Name="July" Type="varchar" MaxLength="50" />
+    <Property Name="August" Type="varchar" MaxLength="50" />
+    <Property Name="September" Type="varchar" MaxLength="50" />
+    <Property Name="October" Type="varchar" MaxLength="50" />
+    <Property Name="November" Type="varchar" MaxLength="50" />
+    <Property Name="December" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="userInfo">
     <Key>
       <PropertyRef Name="userID" />
@@ -59,6 +78,7 @@
     <Property Name="BanStatus" Type="varchar" MaxLength="50" />
     <Property Name="isVerified" Type="varchar" MaxLength="50" />
     <Property Name="darkMood" Type="varchar" MaxLength="50" />
+    <Property Name="Salary" Type="int" />
   </EntityType>
   <Association Name="FK_Posts_Posts">
     <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
@@ -108,6 +128,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Salary_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_userInfo_Posts">
     <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
     <End Role="userInfo1" Type="Self.userInfo" Multiplicity="0..1" />
@@ -125,6 +157,7 @@
     <EntitySet Name="contactUs" EntityType="Self.contactUs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
       <End Role="Posts" EntitySet="Posts" />
@@ -141,6 +174,10 @@
     <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
       <End Role="userInfo" EntitySet="userInfo" />
       <End Role="reports" EntitySet="reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_userInfo" Association="Self.FK_Salary_userInfo">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="Salary" EntitySet="Salary" />
     </AssociationSet>
     <AssociationSet Name="FK_userInfo_Posts" Association="Self.FK_userInfo_Posts">
       <End Role="userInfo" EntitySet="userInfo" />

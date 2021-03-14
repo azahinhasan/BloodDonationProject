@@ -13,7 +13,7 @@ namespace BloodDonationProject.Controllers
 {
     public class AdminController : Controller
     {
-        Models.BloodDonationDBEntities10 context = new Models.BloodDonationDBEntities10();
+        Models.BloodDonationDBEntities12 context = new Models.BloodDonationDBEntities12();
         // GET: Admin
         public ActionResult Index()
         {
@@ -245,6 +245,7 @@ namespace BloodDonationProject.Controllers
         {
             var rand = new Random();
             bool EmailAlreadyAdded = context.userInfoes.Any(x => x.Email == info.Email);
+            Salary infoSalary = new Salary();
             //bool PassAlreadyAdded = context.userInfoes.Any(x => x.Password == info.Password);
 
             if (EmailAlreadyAdded)
@@ -273,6 +274,9 @@ namespace BloodDonationProject.Controllers
                         info.darkMood = "no";
                         context.userInfoes.Add(info);
                         context.SaveChanges();
+                        infoSalary.UserId = info.userID;
+                        context.Salaries.Add(infoSalary);
+                        context.SaveChanges();
                         return RedirectToAction("AfterReg", new { info.Email });
                         //return RedirectToAction("AfterReg");
 
@@ -300,6 +304,50 @@ namespace BloodDonationProject.Controllers
             }
             return View(context.contactUs.ToList());
         }
+
+        public ActionResult SalaryList()
+        {
+            if (Session["Email"] != "azahinhasan@gmail.com")
+            {
+                TempData["errorLogin"] = "You dont have acess";
+                return RedirectToAction("Login", "Home");
+
+            }
+            return View(context.Salaries.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult SalaryListUpdate(int id)
+        {
+            var SalaryListUpdate = context.Salaries.Find(id);
+
+            return View(SalaryListUpdate);
+        }
+
+        [HttpPost]
+        public ActionResult SalaryListUpdate(int id, Salary info)
+        {
+            info.id = id;
+            var SalaryListUpdate = context.Salaries.Find(id);
+
+            SalaryListUpdate.January = info.January;
+            SalaryListUpdate.February = info.February;
+            SalaryListUpdate.March = info.March;
+            SalaryListUpdate.April = info.April;
+            SalaryListUpdate.May = info.May;
+            SalaryListUpdate.June = info.June;
+            SalaryListUpdate.July = info.July;
+            SalaryListUpdate.August = info.August;
+            SalaryListUpdate.September = info.September;
+            SalaryListUpdate.October = info.October;
+            SalaryListUpdate.November = info.November;
+            SalaryListUpdate.December = info.December;
+            //context.Entry(category).State = EntityState.Modified;
+            context.SaveChanges();
+            TempData["SalaryUpadated"] = "Salary Info Updated";
+            return RedirectToAction("SalaryListUpdate",new { id = id});
+        }
+
 
         [HttpGet]
 

@@ -13,10 +13,10 @@ namespace BloodDonationProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BloodDonationDBEntities10 : DbContext
+    public partial class BloodDonationDBEntities12 : DbContext
     {
-        public BloodDonationDBEntities10()
-            : base("name=BloodDonationDBEntities10")
+        public BloodDonationDBEntities12()
+            : base("name=BloodDonationDBEntities12")
         {
         }
     
@@ -29,6 +29,7 @@ namespace BloodDonationProject.Models
         public virtual DbSet<contactU> contactUs { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<report> reports { get; set; }
+        public virtual DbSet<Salary> Salaries { get; set; }
         public virtual DbSet<userInfo> userInfoes { get; set; }
     }
 }

@@ -126,6 +126,18 @@
                     </td>
                 </tr>
 
+                <tr class="form-group">
+                    <td>
+                        Salary(Monthly):
+                    </td>
+                    <td class="col-md-10">
+                        @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @type = "number"} })
+                    </td>
+                    <td class="col-md-10">
+                        @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+
 
                 <tr class="form-group">
                     <td>
@@ -159,10 +171,8 @@
                 </tr>
                 <tr class="form-group">
                     <td>
-                      
                     </td>
                     <td class="col-md-10">
-
                     </td>
                     <td class="col-md-10">
                         <div class="form-group">

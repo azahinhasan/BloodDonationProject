@@ -1,0 +1,112 @@
+﻿@model IEnumerable<BloodDonationProject.Models.Salary>
+
+<head>
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
+</head>
+<table class="table">
+    <h2>Salary List</h2>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.userInfo.Name)
+        </th>
+        <th>
+            Postiton
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userInfo.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.January)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.February)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.March)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.April)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.May)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.June)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.July)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.August)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.September)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.October)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.November)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.December)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.userInfo.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.userInfo.Type)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.userInfo.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.January)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.February)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.March)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.April)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.May)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.June)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.July)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.August)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.September)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.October)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.November)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.December)
+    </td>
+
+    <td>
+        @Html.ActionLink("Update", "SalaryListUpdate", new { id = item.id }) 
+    </td>
+</tr>
+}
+
+</table>
