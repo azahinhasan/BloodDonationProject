@@ -256,25 +256,37 @@ namespace BloodDonationProject.Controllers
                       TempData["PasswordExist"] = "Password Already SignUp";
                   }*/
             string path = null;
-
-                path = Path.Combine(Server.MapPath("~/Content/Images/"), Path.GetFileName(file.FileName));
-                file.SaveAs(path);
-                if (!EmailAlreadyAdded && path != null)
+            if (file == null) { TempData["TempPhotoError"] = "Have To Upload Pic"; }
+            else
+            {
+                if (file.ContentType == "image/png" || file.ContentType == "image/jpeg" || file.ContentType == "image/jpg")
                 {
+                    path = Path.Combine(Server.MapPath("~/Content/Images/"), Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                    if (!EmailAlreadyAdded && path != null)
+                    {
 
-                    TempData["DoneReg"] = "New User Added";
-                    info.Password = rand.Next(300, 901).ToString() + "azhe";
-                    info.Docoment = "none";
-                    info.ProPic = file.FileName;
-                    info.darkMood = "no";
-                    context.userInfoes.Add(info);
-                    context.SaveChanges();
-                    return RedirectToAction("AfterReg", new { info.Email });
-                    //return RedirectToAction("AfterReg");
+                        TempData["DoneReg"] = "New User Added";
+                        info.Password = rand.Next(300, 901).ToString() + "azhe";
+                        info.Docoment = "none";
+                        info.ProPic = file.FileName;
+                        info.darkMood = "no";
+                        context.userInfoes.Add(info);
+                        context.SaveChanges();
+                        return RedirectToAction("AfterReg", new { info.Email });
+                        //return RedirectToAction("AfterReg");
 
+                    }
                 }
-                //TempData["TempPhoto"] = "Add Photo";
+                else
+                {
+                    TempData["TempPhotoError"] = "I Pic type should me png/jpeg/jpg";
+                }
+            }
 
+
+            //TempData["TempPhoto"] = "Add Photo";
+       
             return View();
         }
 

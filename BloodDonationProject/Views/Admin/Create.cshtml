@@ -42,8 +42,6 @@
         <div class="form-horizontal">
             <h4>Add New Admin/Modarator</h4>
 
-
-
             <hr />
             <table>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -54,8 +52,9 @@
                     </td>
                     <td class="col-md-10">
                         @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="col-md-10">
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-
                     </td>
                 </tr>
 
@@ -65,6 +64,8 @@
                     </td>
                     <td class="col-md-10">
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="col-md-10">
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         <span>@TempData["EmailExist"]</span>
                     </td>
@@ -79,6 +80,8 @@
 
                     <td class="col-md-10">
                         @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="col-md-10">
                         @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                     </td>
 
@@ -90,6 +93,8 @@
                     </td>
                     <td class="col-md-10">
                         @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="col-md-10">
                         @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                     </td>
                 </tr>
@@ -100,6 +105,8 @@
                     </td>
                     <td class="col-md-10">
                         @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @type = "date" } })
+                    </td>
+                    <td class="col-md-10">
                         @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                     </td>
                 </tr>
@@ -113,6 +120,8 @@
                             <option>Admin</option>
                             <option>Moderator</option>
                         </select>
+                    </td>
+                    <td class="col-md-10">
                         @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                     </td>
                 </tr>
@@ -124,7 +133,10 @@
                     </td>
                     <td class="col-md-10">
                         <input type="file" name="file" id="file" /><br><br>
-                        @TempData["TempPhoto"]
+                    </td>
+                    <td class="col-md-10">
+                        @TempData["TempPhotoError"]
+                    </td>
                 </tr>
 
                 <tr class="form-group">
@@ -139,16 +151,29 @@
                             <option>B+</option>
                             <option>O+</option>
                         </select>
+                    </td>
+                    <td class="col-md-10">
+
                         @Html.ValidationMessageFor(model => model.BloodGroup, "", new { @class = "text-danger" })
                     </td>
                 </tr>
-            </table>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                <tr class="form-group">
+                    <td>
+                      
+                    </td>
+                    <td class="col-md-10">
 
-                </div>
-            </div>
+                    </td>
+                    <td class="col-md-10">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+           
 
         </div>
     }
