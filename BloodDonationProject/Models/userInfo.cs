@@ -11,7 +11,7 @@ namespace BloodDonationProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class userInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,22 +22,30 @@ namespace BloodDonationProject.Models
             this.reports1 = new HashSet<report>();
             this.Salaries = new HashSet<Salary>();
         }
-    
         public int userID { get; set; }
+
         public string Name { get; set; }
+
         public string Password { get; set; }
+
         public string Email { get; set; }
+
+       /* [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]*/
         public string Phone { get; set; }
+
         public string Address { get; set; }
+
         public System.DateTime DOB { get; set; }
         public string Type { get; set; }
         public string Docoment { get; set; }
         public string ProPic { get; set; }
+
         public string BloodGroup { get; set; }
         public Nullable<int> ReportCounter { get; set; }
         public string BanStatus { get; set; }
         public string isVerified { get; set; }
         public string darkMood { get; set; }
+
         public Nullable<int> Salary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

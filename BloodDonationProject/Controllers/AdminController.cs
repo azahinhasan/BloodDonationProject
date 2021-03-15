@@ -7,8 +7,7 @@ using BloodDonationProject.Models;
 using System.Web.Security;
 using Rotativa;
 using System.IO;
-
-
+using System.Text.RegularExpressions;
 namespace BloodDonationProject.Controllers
 {
     public class AdminController : Controller
@@ -343,37 +342,56 @@ namespace BloodDonationProject.Controllers
                   {
                       TempData["PasswordExist"] = "Password Already SignUp";
                   }*/
+            if (info.Email == null || info.Name==null || info.Address == null || info.Salary == null || info.Phone == null)
+            {
+                TempData["ValidationError"] = "Fill UP All Text Box";
+            }
+            if (info.Salary <=0)
+            {
+                TempData["SalaryError"] = "Range should be more then 0";
+            }
+            /*if (info.Phone)
+             {
+                 TempData["SalaryError"] = "Range should be more then 0";
+             }*/
+           /* if (Regex.Match(info.Phone, (@"^(\+[0-9]{9})$").Success)
+            {
+                TempData["PhoneError"] = "InValid Phone Number";
+            }*/
             string path = null;
             if (file == null) { TempData["TempPhotoError"] = "Have To Upload Pic"; }
+      
             else
             {
-                if (file.ContentType == "image/png" || file.ContentType == "image/jpeg" || file.ContentType == "image/jpg")
-                {
-                    path = Path.Combine(Server.MapPath("~/Content/Images/"), Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    if (!EmailAlreadyAdded && path != null)
+                    if (file.ContentType == "image/png" || file.ContentType == "image/jpeg" || file.ContentType == "image/jpg")
                     {
+                        path = Path.Combine(Server.MapPath("~/Content/Images/"), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        if (!EmailAlreadyAdded && path != null)
+                        {
 
-                        TempData["DoneReg"] = "New User Added";
-                        info.Password = rand.Next(300, 901).ToString() + "azhe";
-                        info.Docoment = "none";
-                        info.ProPic = file.FileName;
-                        info.darkMood = "no";
-                        context.userInfoes.Add(info);
-                        context.SaveChanges();
-                        infoSalary.UserId = info.userID;
-                        context.Salaries.Add(infoSalary);
-                        context.SaveChanges();
-                        return RedirectToAction("AfterReg", new { info.Email });
-                        //return RedirectToAction("AfterReg");
+                            TempData["DoneReg"] = "New User Added";
+                            info.Password = rand.Next(300, 901).ToString() + "azhe";
+                            info.Docoment = "none";
+                            info.ProPic = file.FileName;
+                            info.darkMood = "no";
+                            context.userInfoes.Add(info);
+                            context.SaveChanges();
+                            infoSalary.UserId = info.userID;
+                            context.Salaries.Add(infoSalary);
+                            context.SaveChanges();
+                            return RedirectToAction("AfterReg", new { info.Email });
+                            //return RedirectToAction("AfterReg");
 
+                        }
                     }
-                }
-                else
-                {
-                    TempData["TempPhotoError"] = "I Pic type should me png/jpeg/jpg";
-                }
+                    else
+                    {
+                        TempData["TempPhotoError"] = "I Pic type should me png/jpeg/jpg";
+                    }
+                
             }
+           
 
 
             //TempData["TempPhoto"] = "Add Photo";
@@ -446,6 +464,11 @@ namespace BloodDonationProject.Controllers
         [HttpPost]
         public ActionResult CreateContactUs(contactU info)
         {
+            if (info.Name == null || info.Email == null || info.Massage == null)
+            {
+                TempData["contactUsDone"] = "Fill up ALl Text Box";
+                return RedirectToAction("CreateContactUs");
+            }
             context.contactUs.Add(info);
             context.SaveChanges();
             TempData["contactUsDone"] = "Thanks for your Info";

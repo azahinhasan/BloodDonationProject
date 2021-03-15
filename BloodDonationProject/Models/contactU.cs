@@ -7,17 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace BloodDonationProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class contactU
     {
+        [Required]
         public int id { get; set; }
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Massage { get; set; }
+        [Required]
         public string Type { get; set; }
     }
 }

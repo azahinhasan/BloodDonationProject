@@ -18,51 +18,58 @@
     {
         @Html.AntiForgeryToken()
 
-            <h2>Login</h2>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+            <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index","Home")</span>
+            <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUs", "Admin")</span>
+            <span style="margin: 10px 10px"> @Html.ActionLink("Login", "Login")</span>
+            <span style="margin: 10px 10px"> @Html.ActionLink("SignUp", "")</span>
+        </nav>
+
+        <h2>Login</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-            <table>
+        <table>
 
-                <tr class="form-group">
-                    <td> 
+            <tr class="form-group">
+                <td>
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td>
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </td>                   
-                </tr>
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </td>
+            </tr>
 
-                <tr class="form-group">
-                    <td>
-                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { Type = "password" } })
-                    </td>
-                    <td>
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </td>
-                </tr>
-               
+            <tr class="form-group">
+                <td>
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { Type = "password" } })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </td>
+            </tr>
 
-                <tr class="form-group">
-                    <td>
-                    </td>
-                    <td>
-                        <p style="color:red">@TempData["errorLogin"]</p>
-                    </td>
-                    <td>
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Login" class="btn btn-default" />
-                        </div>
-                    </td>
-                   
-                </tr>
-               
+
+            <tr class="form-group">
+                <td>
+                </td>
+                <td>
+                    <p style="color:red">@TempData["errorLogin"]</p>
+                </td>
+                <td>
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-default" />
+                    </div>
+                </td>
+
+            </tr>
+
         </table>
     }
 
