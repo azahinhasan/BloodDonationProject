@@ -31,5 +31,6 @@ namespace BloodDonationProject.Models
         public virtual DbSet<report> reports { get; set; }
         public virtual DbSet<Salary> Salaries { get; set; }
         public virtual DbSet<userInfo> userInfoes { get; set; }
+        public virtual DbSet<DisabledAccount> DisabledAccounts { get; set; }
     }
 }

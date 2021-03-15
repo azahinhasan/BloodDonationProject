@@ -3,44 +3,65 @@
 <head>
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Massage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th></th>
-    </tr>
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Massage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
+    <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
+        <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index", "Chart")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Yearly Unban", "UnBanAllView")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
+        @Html.ActionLink("Dark Mood", "darkMood")
+    </nav>
+    <hr />
 
-            @Html.ActionLink("Delete", "CreateContactUsDelete", new { id = item.id }) | | 
-            @Html.ActionLink("About", "CreateContactUsAbout", new { Email = item.Email })
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Massage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
 
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Massage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
 
-</table>
+                    @Html.ActionLink("Delete", "CreateContactUsDelete", new { id = item.id }) | |
+                    @Html.ActionLink("About", "CreateContactUsAbout", new { Email = item.Email })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    </boby>

@@ -3,110 +3,131 @@
 <head>
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
-<table class="table">
-    <h2>Salary List</h2>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.userInfo.Name)
-        </th>
-        <th>
-            Postiton
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.userInfo.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.January)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.February)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.March)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.April)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.May)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.June)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.July)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.August)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.September)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.October)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.November)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.December)
-        </th>
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
 
-        <th></th>
-    </tr>
+    <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
+        <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index", "Chart")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Yearly Unban", "UnBanAllView")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
+        @Html.ActionLink("Dark Mood", "darkMood")
+    </nav>
+    <hr/>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.userInfo.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.userInfo.Type)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.userInfo.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.January)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.February)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.March)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.April)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.May)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.June)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.July)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.August)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.September)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.October)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.November)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.December)
-    </td>
+    <table class="table">
+        <h2>Salary List</h2>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.userInfo.Name)
+            </th>
+            <th>
+                Postiton
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.userInfo.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.January)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.February)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.March)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.April)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.May)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.June)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.July)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.August)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.September)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.October)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.November)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.December)
+            </th>
 
-    <td>
-        @Html.ActionLink("Update", "SalaryListUpdate", new { id = item.id }) 
-    </td>
-</tr>
-}
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userInfo.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userInfo.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userInfo.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.January)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.February)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.March)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.April)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.May)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.June)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.July)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.August)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.September)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.October)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.November)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.December)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Update", "SalaryListUpdate", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>

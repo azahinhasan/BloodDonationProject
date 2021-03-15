@@ -87,5 +87,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DisabledAccounts">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.DisabledAccount">
+        <MappingFragment StoreEntitySet="DisabledAccount">
+          <ScalarProperty Name="DisabledDate" ColumnName="DisabledDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

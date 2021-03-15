@@ -12,18 +12,24 @@
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
-<body>
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
+
     <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
         <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
-        <span style="margin: 10px 10px"> @Html.ActionLink("All Reporst", "showReports")</span>
-        <span style="margin: 10px 10px"> @Html.ActionLink("Modaretor List", "AdnModList")</span>
-        <a style="margin: 10px 10px" href="/">See FeedBacks</a>
-        <a style="margin: 10px 10px" href="/">Other Users Info</a>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index", "Chart")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Yearly Unban", "UnBanAllView")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
-        @*<a style="margin: 10px 10px" href="@Url.Action("darkMood","Admin")">Dark Mood</a>*@
         @Html.ActionLink("Dark Mood", "darkMood")
     </nav>
-
+    <div style="text-align:center;color:red">@TempData["DisableEnableError"]</div>
     <table>
         <tr>
             <th>
@@ -55,6 +61,9 @@
             </th>
             <th>
                 Promotion
+            </th>
+            <th>
+                Action
             </th>
         </tr>
 
@@ -96,6 +105,10 @@
                         <a href="@Url.Action("typeChage", "Admin", new { id = item.userID })" style="pointer-events: @(@Session["Type"] == "Admin" ? "" : "none")">
                             @(item.Type == "Admin" ? "Demotion" : "Promotion")
                         </a>
+                    </td>
+                    <td>
+                        <p style="pointer-events: @(@Session["Type"] == "Admin" ? "" : "none")">@Html.ActionLink("Enable", "EnableAdnMod", new { email = item.Email })</p> | |
+                        <p style="pointer-events: @(@Session["Type"] == "Admin" ? "" : "none")">@Html.ActionLink("Disable", "DisableAdnMod", new { id = item.userID, email = item.Email })</p>
                     </td>
                 </tr>
             }

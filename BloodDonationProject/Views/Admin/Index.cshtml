@@ -6,9 +6,9 @@
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
     <title>Index</title>
 </head>
-<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)"); 
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
                color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
-    
+
     <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
         <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
         <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
@@ -21,14 +21,14 @@
         <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
-        @*<a style="margin: 10px 10px" href="@Url.Action("darkMood","Admin")">Dark Mood</a>*@
         @Html.ActionLink("Dark Mood", "darkMood")
     </nav>
+    <hr />
+    <p style="color:red;"> @TempData["AcessDenay"]</p>
 
+    <div style="text-align:center; font-size:40px;font-weight:bold;">
 
-    <div style="text-align:center; font-size:40px">
-
-        <p> It is @Session["Type"] Profile.</p>
+        <p> It is @Session["Type"]'s Profile.</p>
         <p>Account Login with @Session["Email"]</p>
         <p>Please Choose Option From Nav Bar</p>
 

@@ -3,110 +3,131 @@
     Layout = "~/Views/Shared/View.cshtml";
 }
 
-<h2>Charts</h2>
-@section head
-{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-}
-@using (Html.BeginForm("Index", "Chart", null, FormMethod.Post))
-{
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
 
-    <div Style="font-family: Corbel; font-size: small ;text-align:center; margin: 10px 30% " class="row">
-        <div>
-            <div style="width:700px;height:200px">
-                <canvas id="myChart" style="padding: 0;margin: auto;display: block; "> </canvas>
-                <br /><br />
+    <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
+        <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports","Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index", "Chart", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Yearly Unban", "UnBanAllView", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut", "Admin")</span>
+        @Html.ActionLink("Dark Mood", "darkMood")
+    </nav>
+    <hr />
 
-                <canvas id="myChart2" style="padding: 0;margin: auto;display: block; "> </canvas>
+    <h2>Charts</h2>
+    @section head
+{
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    }
+    @using (Html.BeginForm("Index", "Chart", null, FormMethod.Post))
+    {
+
+        <div Style="font-family: Corbel; font-size: small ;text-align:center; margin: 10px 30% " class="row">
+            <div>
+                <div style="width:700px;height:200px">
+                    <canvas id="myChart" style="padding: 0;margin: auto;display: block; "> </canvas>
+                    <br /><br />
+
+                    <canvas id="myChart2" style="padding: 0;margin: auto;display: block; "> </canvas>
+                </div>
             </div>
         </div>
-    </div>
-@*    <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+        @*    <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+                <div>
+                </div>
+                <div>
+                </div>
+            </div>*@
         <div>
+            <script>
+                $.ajax({
+                    type: "POST",
+                    url: "/Chart/NewChart",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (mems) {
+                        var aData = mems;
+                        var aLabels = aData[0];
+                        var aDatasets1 = aData[1];
+                        var dataT = {
+                            labels: aLabels,
+                            datasets: [{
+                                label: "Type",
+                                data: aDatasets1,
+                                fill: false,
+                                backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+                                borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+                                borderWidth: 1
+                            }]
+                        };
+                        var ctx = $("#myChart").get(0).getContext("2d");
+                        var myNewChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: dataT,
+                            options: {
+                                responsive: true,
+                                title: { display: true, text: 'All Users Counter Charts' },
+                                legend: { position: 'bottom' },
+                                scales: {
+                                    xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
+                                    yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 20, beginAtZero: true } }]
+                                },
+                            }
+                        });
+                    }
+                });
+            </script>
         </div>
-        <div>
-        </div>
-    </div>*@
-    <div>
-        <script>
-            $.ajax({
-                type: "POST",
-                url: "/Chart/NewChart",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (mems) {
-                    var aData = mems;
-                    var aLabels = aData[0];
-                    var aDatasets1 = aData[1];
-                    var dataT = {
-                        labels: aLabels,
-                        datasets: [{
-                            label: "Type",
-                            data: aDatasets1,
-                            fill: false,
-                            backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-                            borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
-                            borderWidth: 1
-                        }]
-                    };
-                    var ctx = $("#myChart").get(0).getContext("2d");
-                    var myNewChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: dataT,
-                        options: {
-                            responsive: true,
-                            title: { display: true, text: 'All Users Counter Charts' },
-                            legend: { position: 'bottom' },
-                            scales: {
-                                xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
-                                yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 20, beginAtZero: true } }]
-                            },
-                        }
-                    });
-                }
-            });
-        </script>
-    </div>
 
-    <div style="background-color:black">
-        <script>
-            $.ajax({
-                type: "POST",
-                url: "/Chart/NewChart2",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (mems) {
-                    var aData = mems;
-                    var aLabels = aData[0];
-                    var aDatasets1 = aData[1];
-                    var dataT = {
-                        labels: aLabels,
-                        datasets: [{
-                            label: "Type",
-                            data: aDatasets1,
-                            fill: false,
-                            backgroundColor: ["rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-                            borderColor: ["rgb(153, 102, 255)", "rgb(75, 192, 192)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)"],
-                            borderWidth: 1
-                        }]
-                    };
-                    var ctx = $("#myChart2").get(0).getContext("2d");
-                    var myNewChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: dataT,
-                        options: {
-                            responsive: true,
-                            title: { display: true, text: 'Banned and Not Banned Users' },
-                            legend: { position: 'bottom' },
-                            scales: {
-                                xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
-                                yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 20, beginAtZero: true } }]
-                            },
-                        }
-                    });
-                }
-            });
-        </script>
-    </div>
-}
+        <div style="background-color:black">
+            <script>
+                $.ajax({
+                    type: "POST",
+                    url: "/Chart/NewChart2",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (mems) {
+                        var aData = mems;
+                        var aLabels = aData[0];
+                        var aDatasets1 = aData[1];
+                        var dataT = {
+                            labels: aLabels,
+                            datasets: [{
+                                label: "Type",
+                                data: aDatasets1,
+                                fill: false,
+                                backgroundColor: ["rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+                                borderColor: ["rgb(153, 102, 255)", "rgb(75, 192, 192)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)"],
+                                borderWidth: 1
+                            }]
+                        };
+                        var ctx = $("#myChart2").get(0).getContext("2d");
+                        var myNewChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: dataT,
+                            options: {
+                                responsive: true,
+                                title: { display: true, text: 'Banned and Not Banned Users' },
+                                legend: { position: 'bottom' },
+                                scales: {
+                                    xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
+                                    yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 20, beginAtZero: true } }]
+                                },
+                            }
+                        });
+                    }
+                });
+            </script>
+        </div>
+    }
+
+</body>

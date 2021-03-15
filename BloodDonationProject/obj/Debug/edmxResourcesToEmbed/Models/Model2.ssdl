@@ -20,6 +20,15 @@
     <Property Name="Massage" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="DisabledAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="DisabledDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="Posts">
     <Key>
       <PropertyRef Name="PostID" />
@@ -155,6 +164,7 @@
   <EntityContainer Name="BloodDonationDBModelStoreContainer">
     <EntitySet Name="bannedUser" EntityType="Self.bannedUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contactUs" EntityType="Self.contactUs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DisabledAccount" EntityType="Self.DisabledAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />

@@ -11,7 +11,24 @@
     <title>AdnModList</title>
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
+
+    <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
+        <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index", "Chart", "Chart")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Yearly Unban", "UnBanAllView", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList", "Admin")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut", "Admin")</span>
+        @Html.ActionLink("Dark Mood", "darkMood")
+    </nav>
+    <hr />
 
     <table>
         <tr>
@@ -46,38 +63,38 @@
 
         @foreach (var item in Model)
         {
-           
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @* @Html.DisplayFor(modelItem => item.DOB.ToString("dd/MM/yyyy"))*@
-                        @item.DOB.ToString("dd/MM/yy")
-                    </td>
-                    <td>
-                        @((int.Parse(DateTime.Now.ToString("yyyyMMdd"))- int.Parse(item.DOB.ToString("yyyyMMdd")))/10000 )
-                    </td>
-                    <td>
-                        <img src="~/Content/Images/@item.ProPic" alt="proPic" height="80px" width="80px" style="margin:05px 25px" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodGroup)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "DonnerInfo", new { id = item.userID })
-                    </td>
-                </tr>
-            
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.DOB.ToString("dd/MM/yyyy"))*@
+                    @item.DOB.ToString("dd/MM/yy")
+                </td>
+                <td>
+                    @((int.Parse(DateTime.Now.ToString("yyyyMMdd"))- int.Parse(item.DOB.ToString("yyyyMMdd")))/10000 )
+                </td>
+                <td>
+                    <img src="~/Content/Images/@item.ProPic" alt="proPic" height="80px" width="80px" style="margin:05px 25px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodGroup)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "DonnerInfo", new { id = item.userID })
+                </td>
+            </tr>
+
         }
 
     </table>

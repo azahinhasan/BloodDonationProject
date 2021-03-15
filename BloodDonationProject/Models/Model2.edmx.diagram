@@ -17,6 +17,7 @@
         <AssociationConnector Association="BloodDonationDBModel.FK_reports_userID" ManuallyRouted="false" />
         <AssociationConnector Association="BloodDonationDBModel.FK_Salary_userInfo" ManuallyRouted="false" />
         <AssociationConnector Association="BloodDonationDBModel.FK_userInfo_Posts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BloodDonationDBModel.DisabledAccount" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

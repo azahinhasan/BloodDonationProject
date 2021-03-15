@@ -4,7 +4,23 @@
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body style="background-color:@(Session["DarkMood"].ToString() == "yes" ? "rgb(38, 38, 38)" : "rgb(230, 230, 230)");
+               color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
+
+    <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
+        <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("BannedUsers List", "banUsersList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Contact Us", "CreateContactUsList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Chart", "Index", "Chart")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Yearly Unban", "UnBanAllView")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Salary Info", "SalaryList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Donners List", "DonnerList")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("LogOut", "LogOut")</span>
+        @Html.ActionLink("Dark Mood", "darkMood")
+    </nav>
     <h2>Donner Info</h2>
     <table class="table">
         <tr>
@@ -72,14 +88,15 @@
 
                 </td>
             </tr>
-            <div style="margin: 0px 550px; position:absolute; top:22%; text-align:center">
+            <div style="margin: 0px 550px; position:absolute; top:28%; text-align:center">
                 <h3>Docoment</h3>
-              @*  <img src="~/Content/DocImage/@item.Docoment" alt="proPic" height="420px" width="400px" style="margin:05px 25px" />*@
+                @*  <img src="~/Content/DocImage/@item.Docoment" alt="proPic" height="420px" width="400px" style="margin:05px 25px" />*@
                 <embed src="~/Content/Doc/@item.Docoment" width="800px" height="800px" />
+                <br />
             </div>
 
 
-         
+
 
         }
 

@@ -148,7 +148,50 @@ namespace BloodDonationProject.Controllers
 
             return View(context.userInfoes.Where(r => r.Type == "Admin" | r.Type == "Moderator"));
         }
+        public ActionResult DisableAdnMod(int id,string email)
+        {
+           
 
+            var check = context.DisabledAccounts.Where(r => r.Email == email).ToList();
+
+            if(check.Count != 0)
+            {
+                TempData["DisableEnableError"] = "Account Already Disabled";
+                return RedirectToAction("AdnModList");
+            }
+
+            DateTime utcDate = DateTime.Today;
+            DisabledAccount bn = new DisabledAccount();
+            var data = context.userInfoes.Where(r => r.userID == id).FirstOrDefault<userInfo>();
+
+            bn.Email = data.Email;
+            bn.Name = data.Name;
+            bn.DisabledDate = utcDate;
+
+
+            context.DisabledAccounts.Add(bn);
+            context.SaveChanges();
+            context.Entry(data).State = System.Data.Entity.EntityState.Modified;
+            TempData["DisableEnableError"] = "Account  Disabled";
+            context.SaveChanges();
+            return RedirectToAction("AdnModList");
+        }
+        public ActionResult EnableAdnMod(string email)
+        {
+            var check = context.DisabledAccounts.Where(r => r.Email == email).ToList();
+
+            if (check.Count == 0)
+            {
+                TempData["DisableEnableError"] = "Account Already Enabled";
+                return RedirectToAction("AdnModList");
+            }
+
+            var data = context.DisabledAccounts.Where(r => r.Email == email).FirstOrDefault<DisabledAccount>();
+            context.DisabledAccounts.Remove(context.DisabledAccounts.Find(data.id));
+            context.SaveChanges();
+            TempData["DisableEnableError"] = "Account  Enabled";
+            return RedirectToAction("AdnModList");
+        }
         public ActionResult DonnerList()
         {
             /*if (Session["ValidType"] != "AdMo")
@@ -351,10 +394,10 @@ namespace BloodDonationProject.Controllers
 
         public ActionResult SalaryList()
         {
-            if (Session["Email"] != "azahinhasan@gmail.com")
+            if (Session["Email"].ToString() != "azahinhasan@gmail.com")
             {
-                TempData["errorLogin"] = "You dont have acess";
-                return RedirectToAction("Login", "Home");
+                TempData["AcessDenay"] = "You dont have access!";
+                return RedirectToAction("Index");
 
             }
             return View(context.Salaries.ToList());

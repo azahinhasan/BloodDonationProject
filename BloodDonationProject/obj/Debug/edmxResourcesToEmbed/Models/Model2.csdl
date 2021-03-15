@@ -195,5 +195,15 @@
       <End Role="userInfo" EntitySet="userInfoes" />
       <End Role="userInfo1" EntitySet="userInfoes" />
     </AssociationSet>
+    <EntitySet Name="DisabledAccounts" EntityType="BloodDonationDBModel.DisabledAccount" />
   </EntityContainer>
+  <EntityType Name="DisabledAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DisabledDate" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

@@ -35,6 +35,7 @@ namespace BloodDonationProject.Controllers
             bool DonorisValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "Donor");
 
             bool BanCheck = context.bannedUsers.Any(x => x.Email == Info.Email);
+            bool DisableCheck = context.DisabledAccounts.Any(x => x.Email == Info.Email);
             Session["Email"] = "";
             Session["Type"] = "";
             //Session["Email"] = Info.Email;
@@ -46,10 +47,14 @@ namespace BloodDonationProject.Controllers
 
             if (BanCheck)
             {
-                TempData["errorLogin"] = "Your Account is Banned";
+                TempData["errorLogin"] = "Your Account is Banned.Please go to Contact Us page....";
                 return RedirectToAction("Login");
             }
-
+            if (DisableCheck)
+            {
+                TempData["errorLogin"] = "Your Account is Disabled";
+                return RedirectToAction("Login");
+            }
             if (AdminisValid && !BanCheck)
             {
                 //FormsAuthentication.SetAuthCookie(Info.Email, false);
