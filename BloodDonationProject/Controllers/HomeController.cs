@@ -11,7 +11,7 @@ namespace BloodDonationProject.Controllers
 {
     public class HomeController : Controller
     {
-        Models.BloodDonationDBEntities12 context = new Models.BloodDonationDBEntities12();
+        Models.BloodDonationDBEntities context = new Models.BloodDonationDBEntities();
         // GET: Home
         public ActionResult Index()
         {
@@ -33,6 +33,8 @@ namespace BloodDonationProject.Controllers
             bool ModeratorValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "Moderator");
 
             bool DonorisValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "Donor");
+
+            bool UserValid = context.userInfoes.Any(x => x.Email == Info.Email && x.Password == Info.Password && x.Type == "User");
 
             bool BanCheck = context.bannedUsers.Any(x => x.Email == Info.Email);
             bool DisableCheck = context.DisabledAccounts.Any(x => x.Email == Info.Email);
@@ -70,11 +72,20 @@ namespace BloodDonationProject.Controllers
                 return RedirectToAction("Index", "Admin");
             }
 
+            if (UserValid && !BanCheck)
+            {
+                FormsAuthentication.SetAuthCookie(Info.Email, false);
+                TempData["errorLogin"] = "solved";
+                var userid = context.userInfoes.Where(x => x.Email == Info.Email).FirstOrDefault().userID;
+                Session["userid"] = userid;
+                return RedirectToAction("Dashboard", "User");
+            }
+
             if (DonorisValid && !BanCheck)
             {
                 FormsAuthentication.SetAuthCookie(Info.Email, false);
                 TempData["errorLogin"] = "solved";
-                //return RedirectToAction("Index");
+               // return RedirectToAction("Dashboard", "User");   //oi tonmoy eikhane .....................
             }
 
 

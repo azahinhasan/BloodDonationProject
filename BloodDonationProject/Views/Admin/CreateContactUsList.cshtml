@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<BloodDonationProject.Models.contactU>
 
+@{
+    Layout = null;
+}
+
 <head>
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 </head>
@@ -43,7 +47,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    <a href="mailto: @Html.DisplayFor(modelItem => item.Email)?subject = Replay from bloodDonation Project" target="_blank">  @Html.DisplayFor(modelItem => item.Email)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)

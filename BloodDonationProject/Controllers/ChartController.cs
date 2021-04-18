@@ -9,7 +9,7 @@ namespace BloodDonationProject.Controllers
 {
     public class ChartController : Controller
     {
-        Models.BloodDonationDBEntities12 context = new Models.BloodDonationDBEntities12();
+        Models.BloodDonationDBEntities context = new Models.BloodDonationDBEntities();
         //
         // GET: /Chart/
 
@@ -35,7 +35,7 @@ namespace BloodDonationProject.Controllers
             int adminCount = data.Count;
             data = context.userInfoes.Where(r => r.Type == "Moderator").ToList();
             int ModeratorCount = data.Count;
-            data = context.userInfoes.Where(r => r.Type == "Doner").ToList();
+            data = context.userInfoes.Where(r => r.Type == "Donner").ToList();
             int DonerCount = data.Count;
             data = context.userInfoes.Where(r => r.Type == "User").ToList();
             int UserCount = data.Count;
@@ -61,7 +61,7 @@ namespace BloodDonationProject.Controllers
 
             dr = dt.NewRow();
             dr["Type"] = "User";
-            dr["Count"] = 2;
+            dr["Count"] = UserCount;
             dt.Rows.Add(dr);
 
             foreach (DataColumn dc in dt.Columns)

@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @*<p class="text-danger">Hello!! @TempData["guest_message"]</p>*@
+        <p class="btn "> @Html.ActionLink("Login", "Login", "UserInfo") </p>
+        <br />
+        @Html.ActionLink("Registration", "UserRegistration", "UserInfo")
+    </div>
+</body>
+</html>

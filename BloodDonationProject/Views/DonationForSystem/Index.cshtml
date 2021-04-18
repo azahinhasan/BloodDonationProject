@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Fund Raise</h2>
+
+<h3>You can support our project by your donation.</h3>
+    @Html.ActionLink("Donate to Save This Project", "AddFund")
+
+
+@if (TempData["thanks"] != null)
+{
+    <h4 class="text-success"> @TempData["thanks"] </h4>
+}
+

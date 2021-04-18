@@ -10,6 +10,17 @@
     <Property Name="BannedDate" Type="datetime" />
     <Property Name="duration" Type="int" />
   </EntityType>
+  <EntityType Name="BloodBook">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BloodGroup" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Relation" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="contactUs">
     <Key>
       <PropertyRef Name="id" />
@@ -28,6 +39,38 @@
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="DisabledDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DonationForSystem">
+    <Key>
+      <PropertyRef Name="DonationId" />
+    </Key>
+    <Property Name="DonationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="MoneySource" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="YourMessage" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="donorRatings">
+    <Key>
+      <PropertyRef Name="rateId" />
+    </Key>
+    <Property Name="rateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userID" Type="int" Nullable="false" />
+    <Property Name="oneStar" Type="int" />
+    <Property Name="twoStar" Type="int" />
+    <Property Name="threeStar" Type="int" />
+    <Property Name="fourStar" Type="int" />
+    <Property Name="fiveStar" Type="int" />
+  </EntityType>
+  <EntityType Name="FlagPost">
+    <Key>
+      <PropertyRef Name="FlagId" />
+    </Key>
+    <Property Name="FlagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostID" Type="int" Nullable="false" />
+    <Property Name="userID" Type="int" Nullable="false" />
+    <Property Name="FlagReason" Type="varchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="Posts">
     <Key>
@@ -48,6 +91,15 @@
     <Property Name="Report" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="DonorId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequestBlood">
+    <Key>
+      <PropertyRef Name="RequestId" />
+    </Key>
+    <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Request_Message" Type="varchar" MaxLength="500" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DonarId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Salary">
     <Key>
@@ -88,7 +140,59 @@
     <Property Name="isVerified" Type="varchar" MaxLength="50" />
     <Property Name="darkMood" Type="varchar" MaxLength="50" />
     <Property Name="Salary" Type="int" />
+    <Property Name="LastDonate" Type="date" />
+    <Property Name="Gender" Type="varchar" MaxLength="500" />
+    <Property Name="NID" Type="varchar" MaxLength="50" />
+    <Property Name="Social_Profile" Type="varchar" MaxLength="500" />
   </EntityType>
+  <Association Name="FK_BloodBook_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="BloodBook" Type="Self.BloodBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="BloodBook">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_donorRatings_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="donorRatings" Type="Self.donorRatings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="donorRatings">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlagPost_Posts">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="FlagPost" Type="Self.FlagPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="FlagPost">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlagPost_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="FlagPost" Type="Self.FlagPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="FlagPost">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Posts_Posts">
     <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
     <End Role="Posts1" Type="Self.Posts" Multiplicity="0..1" />
@@ -137,6 +241,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RequestBlood_userInfo">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="RequestBlood" Type="Self.RequestBlood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="RequestBlood">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequestBlood_userInfo1">
+    <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
+    <End Role="RequestBlood" Type="Self.RequestBlood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userInfo">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="RequestBlood">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Salary_userInfo">
     <End Role="userInfo" Type="Self.userInfo" Multiplicity="1" />
     <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
@@ -163,12 +291,33 @@
   </Association>
   <EntityContainer Name="BloodDonationDBModelStoreContainer">
     <EntitySet Name="bannedUser" EntityType="Self.bannedUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BloodBook" EntityType="Self.BloodBook" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contactUs" EntityType="Self.contactUs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DisabledAccount" EntityType="Self.DisabledAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonationForSystem" EntityType="Self.DonationForSystem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="donorRatings" EntityType="Self.donorRatings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlagPost" EntityType="Self.FlagPost" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestBlood" EntityType="Self.RequestBlood" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BloodBook_userInfo" Association="Self.FK_BloodBook_userInfo">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="BloodBook" EntitySet="BloodBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_donorRatings_userInfo" Association="Self.FK_donorRatings_userInfo">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="donorRatings" EntitySet="donorRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlagPost_Posts" Association="Self.FK_FlagPost_Posts">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="FlagPost" EntitySet="FlagPost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlagPost_userInfo" Association="Self.FK_FlagPost_userInfo">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="FlagPost" EntitySet="FlagPost" />
+    </AssociationSet>
     <AssociationSet Name="FK_Posts_Posts" Association="Self.FK_Posts_Posts">
       <End Role="Posts" EntitySet="Posts" />
       <End Role="Posts1" EntitySet="Posts" />
@@ -184,6 +333,14 @@
     <AssociationSet Name="FK_reports_userID" Association="Self.FK_reports_userID">
       <End Role="userInfo" EntitySet="userInfo" />
       <End Role="reports" EntitySet="reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequestBlood_userInfo" Association="Self.FK_RequestBlood_userInfo">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="RequestBlood" EntitySet="RequestBlood" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequestBlood_userInfo1" Association="Self.FK_RequestBlood_userInfo1">
+      <End Role="userInfo" EntitySet="userInfo" />
+      <End Role="RequestBlood" EntitySet="RequestBlood" />
     </AssociationSet>
     <AssociationSet Name="FK_Salary_userInfo" Association="Self.FK_Salary_userInfo">
       <End Role="userInfo" EntitySet="userInfo" />

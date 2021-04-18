@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BloodDonationProject.Models.BloodBook>
+
+@{
+    ViewBag.Title = "BloodBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Blood Book List- Save Your Relatives Info- Help you in Emergency Case!!</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddBloodBook")
+</p>
+
+<form method="post">
+    <div class="form-group">
+        <select class="form-control" name="SearchDonar">
+            <option value="A+">A Positive</option>
+            <option value="A-">A Negative</option>
+            <option value="B+">B Positive</option>
+            <option value="B-">B Negative</option>
+            <option value="AB+">AB Positive</option>
+            <option value="AB-">AB Negative</option>
+            <option value="O+">O Positive</option>
+            <option value="O-">O Negative</option>
+        </select>
+        @*<input type="text" class="form-control" name="SearchDonar" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Blood Group">*@
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<form action="" method="post">
+    <div class="form-group">
+        <input type="submit" value="Clear Filter" name="" />
+     </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BloodGroup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Relation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BloodGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Relation)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Update", "UpdateBloodBook", new { id=item.BookId }) |
+            @Html.ActionLink("Remove", "RemoveBloodBook", new { id=item.BookId })
+        </td>
+    </tr>
+}
+
+</table>

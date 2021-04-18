@@ -1,0 +1,126 @@
+﻿@model BloodDonationProject.Models.userInfo
+
+@{
+    ViewBag.Title = "Monthly Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{ 
+    var jan = 0;
+    var feb = 0;
+    var mar = 0;
+    var apr = 0;
+    var may = 0;
+    var jun = 0;
+    var jul = 0;
+    var aug = 0;
+    var sep = 0;
+    var oct = 0;
+    var nov = 0;
+    var dec = 0;
+}
+
+@foreach (var item in ViewBag.MyPosts as IList<BloodDonationProject.Models.Post>)
+{
+
+    if (item.Time.Month == 1)
+    {
+        jan++;
+    }
+    if (item.Time.Month == 2)
+    {
+        feb++;
+    }
+    if (item.Time.Month == 3)
+    {
+        mar++;
+    }
+    if (item.Time.Month == 4)
+    {
+        apr++;
+    }
+    if (item.Time.Month == 5)
+    {
+        may++;
+    }
+    if (item.Time.Month == 6)
+    {
+        jun++;
+    }
+    if (item.Time.Month == 7)
+    {
+        jul++;
+    }
+    if (item.Time.Month == 8)
+    {
+        aug++;
+    }
+    if (item.Time.Month == 9)
+    {
+        sep++;
+    }
+    if (item.Time.Month == 10)
+    {
+        oct++;
+    }
+    if (item.Time.Month == 11)
+    {
+        nov++;
+    }
+    if (item.Time.Month == 12)
+    {
+        dec++;
+    }
+}
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    
+</head>
+<body>
+    <div id="chartContainer"></div>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "light2",
+                animationEnabled: true,
+                title: {
+                    text: "Column Chart For Monthly Posts"
+                },
+                data: [
+                {
+                    type: "column",
+                    dataPoints: [
+                         { y: @jan, label: "January" },
+                         { y: @feb, label: "February" },
+                         { y: @mar, label: "March" },
+                         { y: @apr, label: "April" },
+                         { y: @may, label: "May" },
+                         { y: @jun, label: "June" },
+                         { y: @jul, label: "July" },
+                         { y: @aug, label: "August" },
+                         { y: @sep, label: "September" },
+                         { y: @oct, label: "October" },
+                         { y: @nov, label: "November" },
+                         { y: @dec, label: "December" },
+                    ]
+                }
+                ]
+            });
+            chart.render();
+        };
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,88 @@
+﻿@model BloodDonationProject.Models.DonationForSystem
+
+@{
+    ViewBag.Title = "AddFund";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddFund</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>DonationForSystem</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoneySource, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="MoneySource" id="exampleFormControlSelect1">
+                    <option>Bkash</option>
+                </select>
+                @*@Html.EditorFor(model => model.MoneySource, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.MoneySource, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (ViewData["loggedUserInfo"] != null)
+                {
+                    var userInfo = (BloodDonationProject.Models.userInfo) ViewData["loggedUserInfo"];
+                    <input type="text" name="Name" class="form-control" value="@userInfo.Name" />
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (ViewData["loggedUserInfo"] != null)
+                {
+                    var userInfo = (BloodDonationProject.Models.userInfo)ViewData["loggedUserInfo"];
+                    <input type="email" name="UserEmail" class="form-control" value="@userInfo.Email" />
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
+                }
+
+                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YourMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YourMessage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YourMessage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Payment Info" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+</div>

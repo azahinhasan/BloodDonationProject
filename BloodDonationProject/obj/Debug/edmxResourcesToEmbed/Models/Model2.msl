@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities12">
+  <EntityContainerMapping StorageEntityContainer="BloodDonationDBModelStoreContainer" CdmEntityContainer="BloodDonationDBEntities">
     <EntitySetMapping Name="bannedUsers">
       <EntityTypeMapping TypeName="BloodDonationDBModel.bannedUser">
         <MappingFragment StoreEntitySet="bannedUser">
@@ -12,6 +12,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BloodBooks">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.BloodBook">
+        <MappingFragment StoreEntitySet="BloodBook">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Relation" ColumnName="Relation" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="contactUs">
       <EntityTypeMapping TypeName="BloodDonationDBModel.contactU">
         <MappingFragment StoreEntitySet="contactUs">
@@ -20,6 +32,51 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Massage" ColumnName="Massage" />
           <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisabledAccounts">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.DisabledAccount">
+        <MappingFragment StoreEntitySet="DisabledAccount">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DisabledDate" ColumnName="DisabledDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonationForSystems">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.DonationForSystem">
+        <MappingFragment StoreEntitySet="DonationForSystem">
+          <ScalarProperty Name="DonationId" ColumnName="DonationId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="MoneySource" ColumnName="MoneySource" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="YourMessage" ColumnName="YourMessage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="donorRatings">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.donorRating">
+        <MappingFragment StoreEntitySet="donorRatings">
+          <ScalarProperty Name="rateId" ColumnName="rateId" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="oneStar" ColumnName="oneStar" />
+          <ScalarProperty Name="twoStar" ColumnName="twoStar" />
+          <ScalarProperty Name="threeStar" ColumnName="threeStar" />
+          <ScalarProperty Name="fourStar" ColumnName="fourStar" />
+          <ScalarProperty Name="fiveStar" ColumnName="fiveStar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlagPosts">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.FlagPost">
+        <MappingFragment StoreEntitySet="FlagPost">
+          <ScalarProperty Name="FlagId" ColumnName="FlagId" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="FlagReason" ColumnName="FlagReason" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -42,6 +99,16 @@
           <ScalarProperty Name="Report1" ColumnName="Report" />
           <ScalarProperty Name="DonorId" ColumnName="DonorId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestBloods">
+      <EntityTypeMapping TypeName="BloodDonationDBModel.RequestBlood">
+        <MappingFragment StoreEntitySet="RequestBlood">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="Request_Message" ColumnName="Request_Message" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DonarId" ColumnName="DonarId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -84,16 +151,10 @@
           <ScalarProperty Name="isVerified" ColumnName="isVerified" />
           <ScalarProperty Name="darkMood" ColumnName="darkMood" />
           <ScalarProperty Name="Salary" ColumnName="Salary" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DisabledAccounts">
-      <EntityTypeMapping TypeName="BloodDonationDBModel.DisabledAccount">
-        <MappingFragment StoreEntitySet="DisabledAccount">
-          <ScalarProperty Name="DisabledDate" ColumnName="DisabledDate" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="LastDonate" ColumnName="LastDonate" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="NID" ColumnName="NID" />
+          <ScalarProperty Name="Social_Profile" ColumnName="Social_Profile" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

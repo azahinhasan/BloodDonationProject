@@ -1,0 +1,55 @@
+﻿@model BloodDonationProject.Models.userInfo
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dashboard</h2>
+
+<h3 class="h3">My Posts</h3>
+
+<div class="row">
+
+    @foreach (var item in ViewBag.MyPosts as IList<BloodDonationProject.Models.Post>)
+    {
+        <div class="col-sm-6">
+            <div class="card">
+
+                <div class="card-body" style="border:1px solid black; padding:5px; margin: 5px;">
+                    <h3 class="card-title">
+                        Group:
+                        <b> @Html.DisplayFor(modelItem => item.WantedBlood)</b>
+                    </h3>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Text)</p>
+                    <p class="card-text">Posted By: @Html.ActionLink(item.userInfo.Name, "UserDetails", new { id = item.UserId })<p>
+                        @Html.ActionLink("Details", "PostDetails", "Post", new { id = item.PostID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "EditPost", "Post", new { id = item.PostID }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Delete", "DeletePost", "Post", new { id = item.PostID }, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<h3>My Request For Blood</h3>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Request To</th>
+            @*<th scope="col">Donar Name</th>*@
+            <th scope="col">Message</th>
+        </tr>
+    </thead>
+    @foreach (var item in ViewBag.MyRequest as IList<BloodDonationProject.Models.RequestBlood>)
+    {
+    <tbody>
+        <tr>
+            <th scope="row">@item.DonarId</th>
+          @*  <th scope="row">@item.userInfo1.Name</th>*@
+            <td>@item.Request_Message</td>
+        </tr>
+    </tbody>
+    }
+</table>

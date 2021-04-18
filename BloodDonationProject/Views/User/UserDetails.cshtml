@@ -1,0 +1,74 @@
+﻿@model BloodDonationProject.Models.userInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset=”utf-8″>
+    <meta http-equiv=”X-UA-Compatible” content=”IE =edge”>
+    <meta name=”viewport” content=”width =device-width, initial-scale=1″>
+    <link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css” integrity=”sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm” crossorigin=”anonymous”>
+    <title>DonarDetails</title>
+</head>
+<body>
+    <div>
+        <h4>userInfo</h4>
+        <hr />
+        <table class="table">
+            <caption class="text-info h4">Primary Infromation</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Details</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>@Model.Name</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>@Model.Phone</td>
+                </tr>
+                <tr>
+                    <th scope="row">Blood Group</th>
+                    <td class="font-weight-bold">@Model.BloodGroup</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Age</th>
+                    <td>@(DateTime.Now.Year - Model.DOB.Year)</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>@Model.Address</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <p>
+        @*@Html.ActionLink("Report", "ReportThisUser", new { id = Model.userID }) |*@
+        @if (Model.Type == "donar")
+        {
+            @Html.ActionLink("Request Blood", "RequestBlood", new { id = Model.userID })
+        }
+
+        <br/>
+        
+        @Html.ActionLink("Back to List", "Donarslist")
+    </p>
+</body>
+</html>

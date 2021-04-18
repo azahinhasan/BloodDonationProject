@@ -1,0 +1,62 @@
+﻿@model BloodDonationProject.Models.DonationForSystem
+
+
+@{
+    ViewBag.Title = "FundMedium";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Fund Raise</h2>
+
+<h3>You can support our project by your donation.</h3>
+
+<table>
+    <tr>
+        <td>Amount: </td>
+        <td>@Model.Amount</td>
+    </tr>
+    <tr>
+        <td>Name: </td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Email: </td>
+        <td>@Model.UserEmail</td>
+    </tr>
+    <tr>
+        <td>Medium: </td>
+        <td>@Model.MoneySource</td>
+    </tr>
+</table>
+
+<h4>Confirm Payment</h4>
+
+<form action="" method="post">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Select Payment Method</label>
+        <select required class="form-control" id="exampleFormControlSelect1">
+            <option>Bkash</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Mobile Number</label>
+        <input name="MobileNumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Mobile Number">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your Details with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">PIN</label>
+        <input name="pin" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter 4 Digit PIN">
+    </div>
+
+    
+    @*<div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>*@
+    <button type="submit" class="btn btn-primary">Confirm</button>
+    <p class="text-danger">@ViewData["ErrorMsg"]</p>
+</form>
+

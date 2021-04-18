@@ -1,0 +1,212 @@
+﻿@model BloodDonationProject.Models.userInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyProfile</title>
+</head>
+<body>
+    <div>
+        <h4 class="text-warning">My Profile</h4>
+        <hr />
+
+        @if (Model.ProPic == null)
+        {
+            <img src="~/UploadedFiles/no-image.jpg" height="100" alt="No Image Uploaded" />
+        }
+        else
+        {
+            <img src="~/@Model.ProPic" height="90" alt="Profile Pic Loading..." />
+        }
+        
+        <br />
+        @Html.ActionLink("Change Profile Picture", "ChangeProPic")
+
+
+       
+        <table class="table">
+            <caption class="text-info h4">Primary Infromation</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Details</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>@Model.Name</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>@Model.Phone</td>
+                </tr>
+                <tr>
+                    <th scope="row">Blood Group</th>
+                    <td>@Model.BloodGroup</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Age</th>
+                    <td>@(DateTime.Now.Year - Model.DOB.Year)</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>@Model.Address</td>
+                </tr>
+            </tbody>
+        </table>
+        
+                </div>
+    <p>
+        @Html.ActionLink("Edit Profile", "EditProfile")
+        
+    </p>
+
+
+    <br />
+
+    <table class="table">
+        <caption class="text-primary h5">Others Infromation</caption>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Details</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Gender</th>
+                <td>@Model.Gender</td>
+                
+            </tr>
+            <tr>
+                <th scope="row">NID</th>
+                <td>@Model.NID</td>
+            </tr>
+            <tr>
+                <th scope="row">Social Profile Link: </th>
+                <td><a target="_blank" href="@Model.Social_Profile">@Model.Social_Profile</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        @Html.ActionLink("Edit Others Info", "EditOthersInfo")
+
+    </p>
+    <br />
+    @{
+        int count = 0;
+        if (Model.Name == null || Model.Name.IsEmpty())
+        {
+            count++; 
+        }
+
+        if (Model.Phone == null || Model.Phone.IsEmpty())
+        {
+            count++;
+        }
+        if (Model.ProPic == null || Model.ProPic.IsEmpty())
+        {
+            count++;
+        }
+        if (Model.Gender == null || Model.Gender.IsEmpty())
+        {
+            count++;
+        }
+        if (Model.Email == null || Model.Email.IsEmpty())
+        {
+            count++;
+        }
+
+        if (Model.DOB == null)
+        {
+            count++;
+        }
+        if (Model.Address == null || Model.Address.IsEmpty())
+        {
+            count++;
+        }
+        if (Model.BloodGroup == null || Model.BloodGroup.IsEmpty())
+        {
+            count++;
+        }
+        if (Model.NID == null || Model.NID.IsEmpty())
+        {
+            count++;
+        }
+        if (Model.Social_Profile == null || Model.Social_Profile.IsEmpty())
+        {
+            count++;
+        }
+
+
+
+        var incomplete = (count * 100) / 10;
+        var completePercentage = 100 - incomplete;
+    }
+
+
+    
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+       
+    </head>
+    <body>
+        <div id="chartContainer"></div>
+        <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "Your Profile Completion"
+                },
+                animationEnabled: true,
+                legend: {
+                    verticalAlign: "center",
+                    horizontalAlign: "left",
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+                },
+                theme: "light2",
+                data: [
+                {
+                    type: "pie",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y}%",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
+                    dataPoints: [
+                        { y: @completePercentage, legendText: "Profile Complete", label: "Profile Complete" },
+                        { y: @incomplete, legendText: "Incomplete", label: "Incomplete" },
+                    ]
+                }
+                ]
+            });
+            chart.render();
+        };
+        </script>
+
+</body>
+</html>
+

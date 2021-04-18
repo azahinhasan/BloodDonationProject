@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BloodDonationProject.Models.Post>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+    <p>
+        @Html.ActionLink("Add New Post", "Addpost")
+    </p>
+
+<h3 class="text-info">Some Recent Post</h3>
+    @*<table class="table">
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.WantedBlood)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.userInfo.Name)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.WantedBlood)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.userInfo.Name)
+            </td>
+            <td>
+               
+                @Html.ActionLink("Details", "PostDetails", new { id=item.PostID })
+                
+            </td>
+        </tr>
+    }
+    
+    </table>*@
+
+
+
+<div class="row">
+@foreach (var item in Model)
+{
+    <div class="col-sm-6">
+        <div class="card">
+             
+            <div class="card-body" style="border:1px solid black; padding:5px; margin: 5px;">
+                <h3 class="card-title">Group:
+                    <b> @Html.DisplayFor(modelItem => item.WantedBlood)</b>
+                </h3>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Text)</p>
+                <p class="card-text">Posted By: @Html.ActionLink(item.userInfo.Name, "UserDetails", "User", new { id = item.UserId }, null)<p>
+                @Html.ActionLink("Details", "PostDetails", new { id = item.PostID }, new {@class = "btn btn-primary" })
+            </div>
+             
+        </div>
+    </div>
+}
+</div>

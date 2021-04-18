@@ -1,0 +1,104 @@
+﻿@model BloodDonationProject.Models.userInfo
+
+@{
+    ViewBag.Title = "User Registration";
+    Layout = null;
+}
+
+<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+<h2>User Registration</h2>
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <h4 class="text-danger ">*Fill All the Fields</h4>
+        <p class="text-danger text-center h3">@ViewBag.ErroMsg</p>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BloodGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="BloodGroup">
+                    <option value="A+">A Positive</option>
+                    <option value="A-">A Negative</option>
+                    <option value="B+">B Positive</option>
+                    <option value="B-">B Negative</option>
+                    <option value="AB+">AB Positive</option>
+                    <option value="AB-">AB Negative</option>
+                    <option value="O+">O Positive</option>
+                    <option value="O-">O Negative</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.BloodGroup, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Registration" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    Already Registered?
+    @Html.ActionLink("Login", "Login", "UserInfo") 
+    <br/>
+    @Html.ActionLink("Back to Home", "Index", "User")
+</div>

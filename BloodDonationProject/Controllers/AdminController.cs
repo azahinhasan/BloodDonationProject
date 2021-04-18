@@ -12,7 +12,8 @@ namespace BloodDonationProject.Controllers
 {
     public class AdminController : Controller
     {
-        Models.BloodDonationDBEntities12 context = new Models.BloodDonationDBEntities12();
+        
+        Models.BloodDonationDBEntities context = new Models.BloodDonationDBEntities();
         // GET: Admin
         public ActionResult Index()
         {
@@ -387,7 +388,7 @@ namespace BloodDonationProject.Controllers
                     }
                     else
                     {
-                        TempData["TempPhotoError"] = "I Pic type should me png/jpeg/jpg";
+                        TempData["TempPhotoError"] = "Pic type should me png/jpeg/jpg";
                     }
                 
             }
@@ -466,7 +467,7 @@ namespace BloodDonationProject.Controllers
         {
             if (info.Name == null || info.Email == null || info.Massage == null)
             {
-                TempData["contactUsDone"] = "Fill up ALl Text Box";
+                TempData["contactUsDone"] = "Fill up All Text Box";
                 return RedirectToAction("CreateContactUs");
             }
             context.contactUs.Add(info);

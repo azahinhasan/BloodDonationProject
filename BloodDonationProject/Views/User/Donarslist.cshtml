@@ -1,0 +1,95 @@
+﻿@model IEnumerable<BloodDonationProject.Models.userInfo>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Donarslist</title>
+</head>
+<body>
+    
+
+    <form method="post">
+        <div class="form-group">
+            <select class="form-control" name="SearchDonar">
+                <option value="A+">A Positive</option>
+                <option value="A-">A Negative</option>
+                <option value="B+">B Positive</option>
+                <option value="B-">B Negative</option>
+                <option value="AB+">AB Positive</option>
+                <option value="AB-">AB Negative</option>
+                <option value="O+">O Positive</option>
+                <option value="O-">O Negative</option>
+            </select>
+            @*<input type="text" class="form-control" name="SearchDonar" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Blood Group">*@
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Blood Group
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                Age
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.BanStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isVerified)
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @(DateTime.Now.Year - item.DOB.Year)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.BanStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isVerified)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Details", "UserDetails", new { id=item.userID })
+                
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

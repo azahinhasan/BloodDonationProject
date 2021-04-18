@@ -7,7 +7,7 @@
                color:@(Session["DarkMood"].ToString() == "yes" ? "white" : "black");">
 
     <nav style="background-color:rgb(255, 204, 204); height:35px;font-size:16px;font-weight:bold">
-        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index")</span>
+        <span style="margin: 10px 10px"> @Html.ActionLink("Home", "Index", "Admin")</span>
         <span style="margin: 0 30px; display:@(Session["Type"].ToString()  == "Moderator" ? "none": "inline")"> @Html.ActionLink("Add Modaretor", "Create")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("All Reports", "showReports","Admin")</span>
         <span style="margin: 10px 10px"> @Html.ActionLink("Employe List", "AdnModList", "Admin")</span>
