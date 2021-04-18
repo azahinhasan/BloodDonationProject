@@ -133,6 +133,21 @@ namespace BloodDonationProject.Controllers
             return View(data);
         }
 
+        [HttpPost]
+        public ActionResult searchContactUs(string value)
+        {
+
+            // return View(context.reports.Where(r => r.DonorId == id));
+            var data = context.contactUs.Where(r => r.Type == value).ToList();
+            if (!data.Any())
+            {
+                TempData["searchReportsError"] = "Not Found";
+                return RedirectToAction("banUsersList");
+            }
+
+            return View(data);
+        }
+
         public ActionResult AdnModList()
         {
             if (Session["ValidType"] != "AdMo")
